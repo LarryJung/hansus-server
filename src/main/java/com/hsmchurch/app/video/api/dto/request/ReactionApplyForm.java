@@ -7,12 +7,12 @@ import lombok.Value;
 public class ReactionApplyForm {
 
     private final Long videoId;
-    private final Long userId;
+    private final Long accountId;
     private final Long reactionId;
 
-    public ReactionApplyForm(final Long videoId, final Long userId, final Long reactionId) {
+    public ReactionApplyForm(final Long videoId, final Long accountId, final Long reactionId) {
         this.videoId = videoId;
-        this.userId = userId;
+        this.accountId = accountId;
         this.reactionId = reactionId;
     }
 }

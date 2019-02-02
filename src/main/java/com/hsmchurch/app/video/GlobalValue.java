@@ -1,9 +1,12 @@
 package com.hsmchurch.app.video;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Profile;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Component;
 
 @Component
+//@Profile("!db-test")
 public class GlobalValue {
 
     public static String YOUTUBE_CLIENT_KEY;
@@ -24,7 +27,5 @@ public class GlobalValue {
     public void setYoutubeChannelId(String channelId) {
         YOUTUBE_CHANNEL_ID = channelId;
     }
-
-
 
 }

@@ -31,9 +31,11 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile 'mysql:mysql-connector-java'
     compile('org.projectlombok:lombok')
-    
-    testCompile'org.springframework.boot:spring-boot-starter-test'
+
+    testCompile 'com.h2database:h2'
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
     testCompile 'org.springframework.security:spring-security-test'
+
     compile group: 'com.google.guava', name: 'guava', version: '11.0.2'
     compile "com.google.code.gson:gson:2.8.5"
 

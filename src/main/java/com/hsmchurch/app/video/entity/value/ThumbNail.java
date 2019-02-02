@@ -1,24 +1,32 @@
 package com.hsmchurch.app.video.entity.value;
 
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-@Value
+@Data
 @Embeddable
+@NoArgsConstructor
 public class ThumbNail {
 
-    private final String thumbnailUrl;
-    private final int thumbnailWidth;
-    private final int thumbnailHeight;
+    @Column
+    private String thumbnailUrl;
 
-    private ThumbNail(final String thumbnailUrl, final int thumbnailWidth, final int thumbnailHeight) {
+    @Column
+    private int thumbnailWidth;
+
+    @Column
+    private int thumbnailHeight;
+
+    private ThumbNail(String thumbnailUrl, int thumbnailWidth, int thumbnailHeight) {
         this.thumbnailUrl = thumbnailUrl;
         this.thumbnailWidth = thumbnailWidth;
         this.thumbnailHeight = thumbnailHeight;
     }
 
-    public static ThumbNail of(final String thumbnailUrl, final int thumbnailWidth, final int thumbnailHeight) {
+    public static ThumbNail of(String thumbnailUrl, int thumbnailWidth, int thumbnailHeight) {
         return new ThumbNail(thumbnailUrl, thumbnailWidth, thumbnailHeight);
     }
 

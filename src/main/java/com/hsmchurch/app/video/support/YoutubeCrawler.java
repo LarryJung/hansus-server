@@ -25,9 +25,6 @@ import static java.util.stream.Collectors.toList;
 public class YoutubeCrawler {
 
     public static List<YoutubeForm> collectInfos(final String nextToken, final List<YoutubeForm> youtubeForms) throws JSONException {
-        System.out.println("key : " + GlobalValue.YOUTUBE_CLIENT_KEY);
-        System.out.println("url " + GlobalValue.YOUTUBE_API_URL);
-        System.out.println("channel :" + GlobalValue.YOUTUBE_CHANNEL_ID);
         final JSONObject videoListJSON = callApiResponse(nextToken);
         final List<YoutubeForm> newList = new ArrayList<>();
         final JSONArray items = videoListJSON.getJSONArray("items");

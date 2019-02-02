@@ -1,8 +1,10 @@
 package com.hsmchurch.app.video.service;
 
 import com.hsmchurch.app.video.entity.LikeTag;
+import com.hsmchurch.app.video.entity.QLikeTag;
 import com.hsmchurch.app.video.entity.repository.LikeTagRepository;
 import com.hsmchurch.app.video.api.dto.request.LikeTagForm;
+import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,24 +15,24 @@ import java.util.List;
 public class LikeTagService {
 
     private final LikeTagRepository likeTagRepository;
+    private final JPAQueryFactory queryFactory;
+    private final static QLikeTag Q_LIKE_TAG = QLikeTag.likeTag;
 
     public void applyLikeTag(final LikeTagForm likeTagForm) {
 
         likeTagRepository.save(LikeTag.of(likeTagForm));
     }
 
-    public boolean cancelLikeTag(final LikeTagForm likeTagForm) {
-        final LikeTag willBeDeleted = likeTagRepository.findByVideoIdAndAccountId(likeTagForm.getVideoId(), likeTagForm.getUserId())
-                .orElseThrow(() -> new RuntimeException("좋아요 태그를 찾을 수 없습니다."));
-        try {
-            likeTagRepository.delete(willBeDeleted);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
+    public long cancelLikeTag(final LikeTagForm likeTagForm) {
+        return queryFactory.delete(Q_LIKE_TAG)
+                .where(
+                        Q_LIKE_TAG.videoId.eq(likeTagForm.getVideoId())
+                                .and(Q_LIKE_TAG.accountId.eq(likeTagForm.getAccountId()))
+                )
+                .execute();
     }
 
-    public List<LikeTag> findAllByAccountId(Long accountId) {
+    public List<LikeTag> findAllByAccountId(final Long accountId) {
         return likeTagRepository.findAllByAccountId(accountId);
     }
 }

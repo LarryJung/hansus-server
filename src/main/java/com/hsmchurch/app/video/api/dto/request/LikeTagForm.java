@@ -6,11 +6,11 @@ import lombok.Value;
 public class LikeTagForm {
 
     private final Long videoId;
-    private final Long userId;
+    private final Long accountId;
 
-    public LikeTagForm(final Long videoId, final Long userId) {
+    public LikeTagForm(final Long videoId, final Long accountId) {
         this.videoId = videoId;
-        this.userId = userId;
+        this.accountId = accountId;
     }
 
 }

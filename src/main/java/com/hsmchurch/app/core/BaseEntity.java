@@ -15,11 +15,9 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public abstract class BaseEntity {
 
-    @NotNull
     @CreatedDate
     private LocalDateTime createdAt;
 
-    @NotNull
     @LastModifiedDate
     private LocalDateTime updatedAt;
 

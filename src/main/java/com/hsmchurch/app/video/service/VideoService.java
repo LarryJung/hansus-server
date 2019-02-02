@@ -51,10 +51,16 @@ public class VideoService {
     }
 
     public Optional<List<VideoResponseDto>> updateVideos() {
+
         try {
-            return Optional.of(YoutubeCrawler.collectInfos(null, new ArrayList<>()).stream()
-                    .map(youtubeForm -> Video.from(youtubeForm).toResponseDto())
-                    .collect(toList()));
+            final List<Video> result = YoutubeCrawler.collectInfos(null, new ArrayList<>()).stream()
+                    .map(Video::from).collect(toList());
+
+            return Optional.of(videoRepository.saveAll(result).stream()
+                    .map(Video::toResponseDto)
+                    .collect(toList())
+            );
+
         } catch (JSONException e) {
             return Optional.empty();
         }

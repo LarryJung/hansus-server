@@ -31,6 +31,6 @@ public class LikeTag extends BaseEntity {
     }
 
     public static LikeTag of(final LikeTagForm likeTagForm) {
-        return new LikeTag(likeTagForm.getVideoId(), likeTagForm.getUserId());
+        return new LikeTag(likeTagForm.getVideoId(), likeTagForm.getAccountId());
     }
 }

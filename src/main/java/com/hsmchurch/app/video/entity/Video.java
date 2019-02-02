@@ -8,10 +8,7 @@ import com.hsmchurch.app.video.entity.value.BibleContent;
 import com.hsmchurch.app.video.entity.value.ThumbNail;
 import com.hsmchurch.app.video.entity.value.type.VideoType;
 import com.hsmchurch.app.video.support.DescriptionParser;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -20,6 +17,7 @@ import java.util.List;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+@Getter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
