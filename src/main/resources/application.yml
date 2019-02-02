@@ -1,0 +1,27 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  datasource:
+    url: ${jdbc_database_url}
+    username: ${jdbc_database_username}
+    password: ${jdbc_database_password}
+    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+  h2:
+    console:
+      enabled: true
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        hbm2ddl.auto: create
+        format_sql: true
+    database-platform: org.hibernate.dialect.MySQL5Dialect
+
+youtube:
+  key: ${youtube_client_key}
+  url: ${youtube_api_url}
+  channelId: ${youtube_channel_id}
