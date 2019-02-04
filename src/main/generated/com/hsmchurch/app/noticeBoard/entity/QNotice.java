@@ -45,7 +45,7 @@ public class QNotice extends EntityPathBase<Notice> {
     //inherited
     public final BooleanPath usable = _super.usable;
 
-    public final com.hsmchurch.app.account.entity.QAccount writer;
+    public final com.hsmchurch.app.security.account.entity.QAccount writer;
 
     public QNotice(String variable) {
         this(Notice.class, forVariable(variable), INITS);
@@ -65,7 +65,7 @@ public class QNotice extends EntityPathBase<Notice> {
 
     public QNotice(Class<? extends Notice> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.writer = inits.isInitialized("writer") ? new com.hsmchurch.app.account.entity.QAccount(forProperty("writer")) : null;
+        this.writer = inits.isInitialized("writer") ? new com.hsmchurch.app.security.account.entity.QAccount(forProperty("writer")) : null;
     }
 
 }

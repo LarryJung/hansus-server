@@ -1,15 +1,14 @@
-package com.hsmchurch.app.account.entity;
+package com.hsmchurch.app.security.account.entity;
 
-import com.hsmchurch.app.account.api.dto.request.AccountResponseDto;
-import com.hsmchurch.app.account.entity.value.AccountOrigin;
-import com.hsmchurch.app.account.entity.value.Role;
+import com.hsmchurch.app.security.account.api.dto.request.AccountResponseDto;
+import com.hsmchurch.app.security.account.entity.value.AccountOrigin;
+import com.hsmchurch.app.security.account.entity.value.Role;
 import com.hsmchurch.app.core.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import static javax.persistence.GenerationType.AUTO;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter

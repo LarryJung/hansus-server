@@ -1,7 +1,7 @@
 package com.hsmchurch.app.reply.service;
 
-import com.hsmchurch.app.account.entity.Account;
-import com.hsmchurch.app.account.entity.AccountRepository;
+import com.hsmchurch.app.security.account.entity.Account;
+import com.hsmchurch.app.security.account.entity.AccountRepository;
 import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteForm;
 import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteForm;
 import com.hsmchurch.app.reply.entity.Reply;

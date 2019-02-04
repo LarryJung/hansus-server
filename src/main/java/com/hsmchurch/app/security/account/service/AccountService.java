@@ -1,7 +1,7 @@
-package com.hsmchurch.app.account.service;
+package com.hsmchurch.app.security.account.service;
 
-import com.hsmchurch.app.account.entity.Account;
-import com.hsmchurch.app.account.entity.AccountRepository;
+import com.hsmchurch.app.security.account.entity.Account;
+import com.hsmchurch.app.security.account.entity.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

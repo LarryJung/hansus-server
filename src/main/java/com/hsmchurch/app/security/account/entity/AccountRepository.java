@@ -1,4 +1,4 @@
-package com.hsmchurch.app.account.entity;
+package com.hsmchurch.app.security.account.entity;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;

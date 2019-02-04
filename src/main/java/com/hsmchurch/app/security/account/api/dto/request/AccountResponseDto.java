@@ -1,6 +1,6 @@
-package com.hsmchurch.app.account.api.dto.request;
+package com.hsmchurch.app.security.account.api.dto.request;
 
-import com.hsmchurch.app.account.entity.value.Role;
+import com.hsmchurch.app.security.account.entity.value.Role;
 import lombok.Builder;
 import lombok.Value;
 

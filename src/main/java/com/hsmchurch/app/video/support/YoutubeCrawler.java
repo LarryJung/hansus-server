@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.support;
 
-import com.hsmchurch.app.video.GlobalValue;
+import com.hsmchurch.app.core.GlobalValue;
 import com.hsmchurch.app.video.api.dto.request.ThumbNailForm;
 import com.hsmchurch.app.video.api.dto.request.YoutubeForm;
 import org.springframework.http.HttpEntity;

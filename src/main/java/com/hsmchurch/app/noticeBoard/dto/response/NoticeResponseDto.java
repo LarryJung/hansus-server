@@ -1,6 +1,6 @@
 package com.hsmchurch.app.noticeBoard.dto.response;
 
-import com.hsmchurch.app.account.api.dto.request.AccountResponseDto;
+import com.hsmchurch.app.security.account.api.dto.request.AccountResponseDto;
 import lombok.Builder;
 import lombok.Value;
 

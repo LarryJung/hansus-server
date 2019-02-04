@@ -1,4 +1,4 @@
-package com.hsmchurch.app.account.entity;
+package com.hsmchurch.app.security.account.entity;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -21,7 +21,7 @@ public class QAccount extends EntityPathBase<Account> {
 
     public final com.hsmchurch.app.core.QBaseEntity _super = new com.hsmchurch.app.core.QBaseEntity(this);
 
-    public final EnumPath<com.hsmchurch.app.account.entity.value.AccountOrigin> accountOrigin = createEnum("accountOrigin", com.hsmchurch.app.account.entity.value.AccountOrigin.class);
+    public final EnumPath<com.hsmchurch.app.security.account.entity.value.AccountOrigin> accountOrigin = createEnum("accountOrigin", com.hsmchurch.app.security.account.entity.value.AccountOrigin.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
@@ -38,7 +38,7 @@ public class QAccount extends EntityPathBase<Account> {
 
     public final StringPath password = createString("password");
 
-    public final EnumPath<com.hsmchurch.app.account.entity.value.Role> role = createEnum("role", com.hsmchurch.app.account.entity.value.Role.class);
+    public final EnumPath<com.hsmchurch.app.security.account.entity.value.Role> role = createEnum("role", com.hsmchurch.app.security.account.entity.value.Role.class);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;

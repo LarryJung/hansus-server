@@ -1,6 +1,6 @@
 package com.hsmchurch.app.noticeBoard.service;
 
-import com.hsmchurch.app.account.entity.Account;
+import com.hsmchurch.app.security.account.entity.Account;
 import com.hsmchurch.app.noticeBoard.entity.Notice;
 import com.hsmchurch.app.noticeBoard.entity.NoticeRepository;
 import com.hsmchurch.app.noticeBoard.dto.request.DeleteForm;

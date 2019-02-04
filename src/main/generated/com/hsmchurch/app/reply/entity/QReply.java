@@ -45,7 +45,7 @@ public class QReply extends EntityPathBase<Reply> {
 
     public final com.hsmchurch.app.video.entity.QVideo video;
 
-    public final com.hsmchurch.app.account.entity.QAccount writer;
+    public final com.hsmchurch.app.security.account.entity.QAccount writer;
 
     public QReply(String variable) {
         this(Reply.class, forVariable(variable), INITS);
@@ -66,7 +66,7 @@ public class QReply extends EntityPathBase<Reply> {
     public QReply(Class<? extends Reply> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.video = inits.isInitialized("video") ? new com.hsmchurch.app.video.entity.QVideo(forProperty("video"), inits.get("video")) : null;
-        this.writer = inits.isInitialized("writer") ? new com.hsmchurch.app.account.entity.QAccount(forProperty("writer")) : null;
+        this.writer = inits.isInitialized("writer") ? new com.hsmchurch.app.security.account.entity.QAccount(forProperty("writer")) : null;
     }
 
 }

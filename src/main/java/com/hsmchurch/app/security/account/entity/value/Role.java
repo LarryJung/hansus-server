@@ -1,4 +1,4 @@
-package com.hsmchurch.app.account.entity.value;
+package com.hsmchurch.app.security.account.entity.value;
 
 import lombok.Getter;
 import org.springframework.security.access.AuthorizationServiceException;

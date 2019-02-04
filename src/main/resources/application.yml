@@ -17,8 +17,15 @@ spring:
 youtube:
   key: ${youtube_client_key}
   url: ${youtube_api_url}
-  channelId: ${youtube_channel_id}
+  channel-id: ${youtube_channel_id}
 
+security:
+  oauth:
+    host:
+      kakao: https://kauth.kakao.com/oauth/authorize
+    client-id:
+      kakao: ${kakao_client_id}
+    redirect_uri: http://localhost:8080/oauth
 
 ---
 spring:
@@ -40,4 +47,4 @@ spring:
 youtube:
   key:
   url:
-  channelId:
+  channel-id:
