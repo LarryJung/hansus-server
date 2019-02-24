@@ -41,6 +41,8 @@ dependencies {
 
     compile('com.querydsl:querydsl-apt')
     compile('com.querydsl:querydsl-jpa')
+
+    compile 'org.json:json:20171018'
 }
 
 apply plugin: "com.ewerk.gradle.plugins.querydsl" // Plugin 적용
