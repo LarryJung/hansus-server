@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = false)
@@ -33,12 +34,14 @@ public class Account extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AccountOrigin accountOrigin;
 
+    private String socialId;
+
     @NotNull
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    public static Account of(Long id, String name, String password, AccountOrigin accountOrigin, Role role) {
-        return new Account(id, name, password, accountOrigin, role);
+    public static Account of(Long id, String name, String password, AccountOrigin accountOrigin, String socialId, Role role) {
+        return new Account(id, name, password, accountOrigin, socialId, role);
     }
 
     public boolean isYou(final Long writerId) {

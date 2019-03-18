@@ -8,6 +8,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service
@@ -15,8 +17,10 @@ import java.util.List;
 public class LikeTagService {
 
     private final LikeTagRepository likeTagRepository;
-    private final JPAQueryFactory queryFactory;
     private final static QLikeTag Q_LIKE_TAG = QLikeTag.likeTag;
+    @PersistenceContext
+    private EntityManager entityManager;
+    private JPAQueryFactory queryFactory =  new JPAQueryFactory(entityManager);
 
     public void applyLikeTag(final LikeTagForm likeTagForm) {
 

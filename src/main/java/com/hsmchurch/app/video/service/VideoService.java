@@ -4,17 +4,13 @@ import com.hsmchurch.app.video.entity.LikeTag;
 import com.hsmchurch.app.video.entity.Video;
 import com.hsmchurch.app.video.entity.repository.VideoRepository;
 import com.hsmchurch.app.video.api.dto.response.VideoResponseDto;
-import com.hsmchurch.app.video.support.YoutubeCrawler;
 import lombok.RequiredArgsConstructor;
-import org.json.JSONException;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
 
 import static java.util.stream.Collectors.toList;
 
@@ -49,22 +45,5 @@ public class VideoService {
         return videoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("영상을 찾을 수 없습니다."));
     }
-
-    public Optional<List<VideoResponseDto>> updateVideos() {
-
-        try {
-            final List<Video> result = YoutubeCrawler.collectInfos(null, new ArrayList<>()).stream()
-                    .map(Video::from).collect(toList());
-
-            return Optional.of(videoRepository.saveAll(result).stream()
-                    .map(Video::toResponseDto)
-                    .collect(toList())
-            );
-
-        } catch (JSONException e) {
-            return Optional.empty();
-        }
-    }
-
 
 }

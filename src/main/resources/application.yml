@@ -25,7 +25,17 @@ security:
       kakao: https://kauth.kakao.com/oauth/authorize
     client-id:
       kakao: ${kakao_client_id}
-    redirect_uri: http://localhost:8080/oauth
+    redirect-uri: http://localhost:8080/oauth
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
+  issuer: hsm-church
 
 ---
 spring:
@@ -48,3 +58,4 @@ youtube:
   key:
   url:
   channel-id:
+

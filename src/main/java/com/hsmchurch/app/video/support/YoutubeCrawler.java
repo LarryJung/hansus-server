@@ -1,8 +1,8 @@
 package com.hsmchurch.app.video.support;
 
-import com.hsmchurch.app.core.GlobalValue;
 import com.hsmchurch.app.video.api.dto.request.ThumbNailForm;
 import com.hsmchurch.app.video.api.dto.request.YoutubeForm;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -24,7 +24,16 @@ import static java.util.stream.Collectors.toList;
 @Component
 public class YoutubeCrawler {
 
-    public static List<YoutubeForm> collectInfos(final String nextToken, final List<YoutubeForm> youtubeForms) throws JSONException {
+    @Value("${youtube.key}")
+    private String YOUTUBE_CLIENT_KEY;
+
+    @Value("${youtube.url}")
+    private String YOUTUBE_API_URL;
+
+    @Value("${youtube.channel-id}")
+    private String YOUTUBE_CHANNEL_ID;
+
+    public List<YoutubeForm> collectInfos(final String nextToken, final List<YoutubeForm> youtubeForms) throws JSONException {
         final JSONObject videoListJSON = callApiResponse(nextToken);
         final List<YoutubeForm> newList = new ArrayList<>();
         final JSONArray items = videoListJSON.getJSONArray("items");
@@ -61,7 +70,7 @@ public class YoutubeCrawler {
         }
     }
 
-    private static JSONObject callApiResponse(final String nextToken) throws JSONException {
+    private JSONObject callApiResponse(final String nextToken) throws JSONException {
         final RestTemplate restTemplate = new RestTemplate();
         final HttpHeaders headers = new HttpHeaders();
         headers.set("Accept", MediaType.APPLICATION_JSON_VALUE);
@@ -74,10 +83,10 @@ public class YoutubeCrawler {
         return new JSONObject(response.getBody());
     }
 
-    private static UriComponentsBuilder getBuilder() {
-        return UriComponentsBuilder.fromHttpUrl(GlobalValue.YOUTUBE_API_URL)
-                .queryParam("key", GlobalValue.YOUTUBE_CLIENT_KEY)
-                .queryParam("channelId", GlobalValue.YOUTUBE_CHANNEL_ID)
+    private UriComponentsBuilder getBuilder() {
+        return UriComponentsBuilder.fromHttpUrl(YOUTUBE_API_URL)
+                .queryParam("key", YOUTUBE_CLIENT_KEY)
+                .queryParam("channelId", YOUTUBE_CHANNEL_ID)
                 .queryParam("part", "snippet")
                 .queryParam("maxResults", 50)
                 .queryParam("order", "date");

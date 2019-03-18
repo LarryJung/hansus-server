@@ -15,7 +15,7 @@ import com.querydsl.core.types.Path;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QAccount extends EntityPathBase<Account> {
 
-    private static final long serialVersionUID = 2120129474L;
+    private static final long serialVersionUID = -1049969838L;
 
     public static final QAccount account = new QAccount("account");
 
@@ -39,6 +39,8 @@ public class QAccount extends EntityPathBase<Account> {
     public final StringPath password = createString("password");
 
     public final EnumPath<com.hsmchurch.app.security.account.entity.value.Role> role = createEnum("role", com.hsmchurch.app.security.account.entity.value.Role.class);
+
+    public final StringPath socialId = createString("socialId");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
