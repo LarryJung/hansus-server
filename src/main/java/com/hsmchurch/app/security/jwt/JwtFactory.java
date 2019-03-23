@@ -1,7 +1,7 @@
 package com.hsmchurch.app.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hsmchurch.app.security.account.entity.value.Role;
+import com.hsmchurch.app.account.entity.value.Role;
 import com.hsmchurch.app.security.oauth.PostAuthorizationToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;

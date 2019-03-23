@@ -4,13 +4,17 @@ import com.hsmchurch.app.security.jwt.HeaderTokenExtractor;
 import com.hsmchurch.app.security.jwt.JwtAuthenticationFilter;
 import com.hsmchurch.app.security.jwt.JwtAuthenticationProvider;
 import com.hsmchurch.app.security.jwt.JwtAuthenticationSuccessHandler;
+import com.hsmchurch.app.security.oauth.Oauth2FetchService;
+import com.hsmchurch.app.security.oauth.SocialFetchService;
 import com.hsmchurch.app.security.oauth.SocialLoginAuthenticationProvider;
 import com.hsmchurch.app.security.oauth.SocialLoginFilter;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -25,6 +29,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final Environment env;
+
+    @Bean("SocialFetchService")
+    public SocialFetchService socialFetchService() {
+        return new Oauth2FetchService();
+    }
 
     @Autowired
     private JwtAuthenticationSuccessHandler successHandler;
@@ -62,6 +71,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         } else {
             setRealMode(http);
         }
+    }
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) {
+        auth
+                .authenticationProvider(this.socialProvider)
+                .authenticationProvider(this.jwtProvider);
     }
 
     private boolean isLocalMode() {

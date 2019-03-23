@@ -1,6 +1,6 @@
 package com.hsmchurch.app.security.jwt;
 
-import com.hsmchurch.app.security.account.entity.value.Role;
+import com.hsmchurch.app.account.entity.value.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

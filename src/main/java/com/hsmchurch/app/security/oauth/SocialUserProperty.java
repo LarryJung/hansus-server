@@ -6,8 +6,14 @@ public interface SocialUserProperty {
 
     String getUserNickname();
 
-    String getProfileHref();
+    String getProfileImage();
 
-    String getEmail();
+    String getThumnailImage();
+
+    String getGender();
+
+    String getBirthDay();
+
+    String getAgeRange();
 
 }

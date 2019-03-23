@@ -1,7 +1,7 @@
 package com.hsmchurch.app.video.support;
 
 import com.hsmchurch.app.video.api.dto.request.ThumbNailForm;
-import com.hsmchurch.app.video.api.dto.request.YoutubeForm;
+import com.hsmchurch.app.video.api.dto.request.YoutubeVideoInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -33,20 +33,20 @@ public class YoutubeCrawler {
     @Value("${youtube.channel-id}")
     private String YOUTUBE_CHANNEL_ID;
 
-    public List<YoutubeForm> collectInfos(final String nextToken, final List<YoutubeForm> youtubeForms) throws JSONException {
+    public List<YoutubeVideoInfo> collectInfos(final String nextToken,
+                                               final List<YoutubeVideoInfo> youtubeVideoInfos) throws JSONException {
         final JSONObject videoListJSON = callApiResponse(nextToken);
-        final List<YoutubeForm> newList = new ArrayList<>();
+        final List<YoutubeVideoInfo> newList = new ArrayList<>();
         final JSONArray items = videoListJSON.getJSONArray("items");
 
         for (int i = 0; i < items.length(); i++) {
-
             final JSONObject item = items.getJSONObject(i);
 
             if (item.getJSONObject("id").optString("videoId").isEmpty()) {
                 continue;
             }
 
-            final YoutubeForm newOne = YoutubeForm.builder()
+            final YoutubeVideoInfo newOne = YoutubeVideoInfo.builder()
                     .id(item.getJSONObject("id").optString("videoId"))
                     .publishedAt(item.getJSONObject("snippet").optString("publishedAt"))
                     .title(item.getJSONObject("snippet").optString("title"))
@@ -55,8 +55,7 @@ public class YoutubeCrawler {
                             .thumbnailUrl(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").optString("url"))
                             .thumbnailWidth(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("width"))
                             .thumbnailHeight(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("height"))
-                            .build()
-                    )
+                            .build())
                     .build();
 
             newList.add(newOne);
@@ -64,9 +63,10 @@ public class YoutubeCrawler {
 
         try {
             final String nextPageToken = videoListJSON.getString("nextPageToken");
-            return collectInfos(nextPageToken, Stream.concat(youtubeForms.stream(), newList.stream()).collect(toList()));
+
+            return collectInfos(nextPageToken, Stream.concat(youtubeVideoInfos.stream(), newList.stream()).collect(toList()));
         } catch (JSONException e) {
-            return Stream.concat(youtubeForms.stream(), newList.stream()).collect(toList());
+            return Stream.concat(youtubeVideoInfos.stream(), newList.stream()).collect(toList());
         }
     }
 
@@ -80,6 +80,7 @@ public class YoutubeCrawler {
         }
         final HttpEntity<?> entity = new HttpEntity<>(headers);
         final HttpEntity<String> response = restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+
         return new JSONObject(response.getBody());
     }
 

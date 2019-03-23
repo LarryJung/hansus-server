@@ -24,7 +24,7 @@ public class QReactionHistory extends EntityPathBase<ReactionHistory> {
 
     public final com.hsmchurch.app.core.QBaseEntity _super = new com.hsmchurch.app.core.QBaseEntity(this);
 
-    public final com.hsmchurch.app.security.account.entity.QAccount account;
+    public final com.hsmchurch.app.account.entity.QAccount account;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
@@ -65,7 +65,7 @@ public class QReactionHistory extends EntityPathBase<ReactionHistory> {
 
     public QReactionHistory(Class<? extends ReactionHistory> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.account = inits.isInitialized("account") ? new com.hsmchurch.app.security.account.entity.QAccount(forProperty("account")) : null;
+        this.account = inits.isInitialized("account") ? new com.hsmchurch.app.account.entity.QAccount(forProperty("account")) : null;
         this.reaction = inits.isInitialized("reaction") ? new QReaction(forProperty("reaction")) : null;
         this.video = inits.isInitialized("video") ? new com.hsmchurch.app.video.entity.QVideo(forProperty("video"), inits.get("video")) : null;
     }

@@ -1,36 +1,34 @@
 package com.hsmchurch.app.video.entity;
 
 import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.video.api.dto.request.LikeTagForm;
-import lombok.EqualsAndHashCode;
+import com.hsmchurch.app.video.api.dto.request.LikeTagRequest;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
-@EqualsAndHashCode(callSuper = false)
 @Getter
+@NoArgsConstructor
 @Table(name = "like_tags")
 @Entity
 public class LikeTag extends BaseEntity {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+   @EmbeddedId
+   private LikeTagId likeTagId;
 
-    private Long videoId;
-
-    private Long accountId;
-
-    public LikeTag() {
-
+    public LikeTag(final LikeTagId likeTagId) {
+        this.likeTagId = likeTagId;
     }
 
-    private LikeTag(final Long videoId, final Long accountId) {
-        this.videoId = videoId;
-        this.accountId = accountId;
+    public static LikeTag of(final LikeTagRequest likeTagRequest) {
+        return new LikeTag(new LikeTagId(likeTagRequest.getVideoId(), likeTagRequest.getAccountId()));
     }
 
-    public static LikeTag of(final LikeTagForm likeTagForm) {
-        return new LikeTag(likeTagForm.getVideoId(), likeTagForm.getAccountId());
+    public void cancel() {
+        markAsDeleted();
+    }
+
+    public Long getVideoId() {
+        return likeTagId.getVideoId();
     }
 }

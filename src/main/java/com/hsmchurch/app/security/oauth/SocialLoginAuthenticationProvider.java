@@ -1,11 +1,10 @@
 package com.hsmchurch.app.security.oauth;
 
-import com.hsmchurch.app.security.account.entity.Account;
-import com.hsmchurch.app.security.account.entity.AccountRepository;
-import com.hsmchurch.app.security.account.entity.value.AccountOrigin;
-import com.hsmchurch.app.security.account.entity.value.Role;
+import com.hsmchurch.app.account.entity.Account;
+import com.hsmchurch.app.account.entity.AccountRepository;
+import com.hsmchurch.app.account.entity.value.AccountOrigin;
+import com.hsmchurch.app.account.entity.value.Role;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
@@ -18,11 +17,11 @@ import java.util.UUID;
 @Component
 public class SocialLoginAuthenticationProvider implements AuthenticationProvider {
 
-    @Autowired
+    @Resource
     private AccountRepository accountRepository;
 
-    @Resource(name = "socialFetchService")
-    private SocialFetchService socialFetchService;
+    @Resource(name = "SocialFetchService")
+    private SocialFetchService SocialFetchService;
 
     @Override
     public Authentication authenticate(Authentication socialPreAuthentication) throws AuthenticationException {
@@ -36,7 +35,7 @@ public class SocialLoginAuthenticationProvider implements AuthenticationProvider
     }
 
     private Account getAccount(SocialLoginDto dto) {
-        SocialUserProperty property = socialFetchService.getSocialUserInfo(dto);
+        SocialUserProperty property = SocialFetchService.getSocialUserInfo(dto);
         log.info("properties : {}", property.getUserNickname());
         String socialId = property.getSocialId();
         SocialProviders provider = dto.getProvider();
@@ -46,10 +45,12 @@ public class SocialLoginAuthenticationProvider implements AuthenticationProvider
                         Account.builder()
                                 .name(property.getUserNickname())
                                 .password(String.valueOf(UUID.randomUUID().getMostSignificantBits()))
-                                .name("SOCIAL_USER")
                                 .role(Role.MEMBER)
                                 .socialId(socialId)
                                 .accountOrigin(AccountOrigin.valueOf(provider.getProviderName()))
+                                .gender(property.getGender())
+                                .ageRange(property.getAgeRange())
+                                .birthday(property.getBirthDay())
                                 .build()));
     }
 

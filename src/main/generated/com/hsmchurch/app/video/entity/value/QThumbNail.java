@@ -10,10 +10,10 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QThumbNail is a Querydsl query type for ThumbNail
+ * QThumbNail is a Querydsl query type for Thumbnail
  */
 @Generated("com.querydsl.codegen.EmbeddableSerializer")
-public class QThumbNail extends BeanPath<ThumbNail> {
+public class QThumbNail extends BeanPath<Thumbnail> {
 
     private static final long serialVersionUID = -5533930L;
 
@@ -26,15 +26,15 @@ public class QThumbNail extends BeanPath<ThumbNail> {
     public final NumberPath<Integer> thumbnailWidth = createNumber("thumbnailWidth", Integer.class);
 
     public QThumbNail(String variable) {
-        super(ThumbNail.class, forVariable(variable));
+        super(Thumbnail.class, forVariable(variable));
     }
 
-    public QThumbNail(Path<? extends ThumbNail> path) {
+    public QThumbNail(Path<? extends Thumbnail> path) {
         super(path.getType(), path.getMetadata());
     }
 
     public QThumbNail(PathMetadata metadata) {
-        super(ThumbNail.class, metadata);
+        super(Thumbnail.class, metadata);
     }
 
 }

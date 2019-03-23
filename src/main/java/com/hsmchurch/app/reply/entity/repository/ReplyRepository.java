@@ -7,6 +7,8 @@ import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long>, ReplyRepositoryCustom {
 
-    List<Reply> findAllByWriterId(Long writerId);
+    List<Reply> findAllByReplier_Id(Long writerId);
+
+    List<Reply> findAllByVideoIdAndReplier_Id(Long videoId, Long replierId);
 
 }

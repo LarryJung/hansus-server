@@ -1,17 +1,10 @@
 package com.hsmchurch.app.reply.service;
 
 import com.hsmchurch.app.core.config.QuerydslConfiguration;
-import com.hsmchurch.app.security.account.entity.Account;
-import com.hsmchurch.app.security.account.entity.AccountRepository;
-import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteForm;
-import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteForm;
-import com.hsmchurch.app.reply.entity.Reply;
-import com.hsmchurch.app.reply.entity.repository.ReplyRepository;
-import com.hsmchurch.app.security.account.service.AccountService;
-import com.hsmchurch.app.video.entity.Video;
-import com.hsmchurch.app.video.entity.repository.VideoRepository;
+import com.hsmchurch.app.reply.api.dto.request.ReplyApplyRequest;
+import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteRequest;
+import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteRequest;
 import com.hsmchurch.app.video.service.LikeTagService;
-import com.hsmchurch.app.video.service.VideoService;
 import lombok.NoArgsConstructor;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,23 +15,16 @@ import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import javax.annotation.Resource;
-
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @NoArgsConstructor
 @ActiveProfiles("db-test")
 @DataJpaTest
-@Import({ReplyService.class, AccountService.class, VideoService.class, LikeTagService.class, QuerydslConfiguration.class})
+@Import({ReplyService.class, LikeTagService.class, QuerydslConfiguration.class})
 public class ReplyServiceTest {
 
-    @Resource
-    private ReplyRepository replyRepository;
-    @Resource
-    private AccountRepository accountRepository;
-    @Resource
-    private VideoRepository videoRepository;
     @Autowired
     private ReplyService replyService;
 
@@ -47,26 +33,39 @@ public class ReplyServiceTest {
 
     @Before
     public void setUp() {
-        Account sampleAccount = accountRepository.findById(ACCOUNT_ID).get();
-        Video sampleVideo = videoRepository.findById(VIDEO_ID).get();
-
-        replyRepository.save(Reply.of(sampleAccount, sampleVideo, "좋습니다1."));
-        replyRepository.save(Reply.of(sampleAccount, sampleVideo, "좋습니다2."));
-        replyRepository.save(Reply.of(sampleAccount, sampleVideo, "좋습니다3."));
+        String ACCOUNT_NAME = "test-user";
+        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.1"));
+        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.2"));
+        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.3"));
     }
 
     @Test
-    public void deleteExceptionTest() {
+    public void deleteExceptionTest_Success() {
         final Long replyId = replyService.findAllByWriter(1L).get(0).getId();
-        final ReplyDeleteForm deleteForm = new ReplyDeleteForm(replyId, 1L);
-        long result = replyService.deleteReply(deleteForm);
-        assertThat(result).isEqualTo(1);
+        final ReplyDeleteRequest replyDeleteRequest = new ReplyDeleteRequest(replyId, ACCOUNT_ID);
+        boolean result = replyService.deleteReply(replyDeleteRequest);
+        assertTrue(result);
     }
 
     @Test
-    public void deleteAllByWriterAndVideo() {
-        final TargetVideoRepliesDeleteForm deleteForm = new TargetVideoRepliesDeleteForm(VIDEO_ID, ACCOUNT_ID);
-        long result = replyService.deleteReplies(deleteForm);
-        assertThat(result).isEqualTo(3);
+    public void deleteExceptionTest_Fail() {
+        final Long replyId = replyService.findAllByWriter(1L).get(0).getId();
+        final ReplyDeleteRequest replyDeleteRequest = new ReplyDeleteRequest(999L, ACCOUNT_ID);
+        boolean result = replyService.deleteReply(replyDeleteRequest);
+        assertFalse(result);
+    }
+
+    @Test
+    public void deleteAllByWriterAndVideo_Success() {
+        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, ACCOUNT_ID);
+        boolean result = replyService.deleteReplies(deleteForm);
+        assertTrue(result);
+    }
+
+    @Test
+    public void deleteAllByWriterAndVideo_Fail() {
+        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, 999L);
+        boolean result = replyService.deleteReplies(deleteForm);
+        assertFalse(result);
     }
 }

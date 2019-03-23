@@ -1,45 +1,49 @@
 package com.hsmchurch.app.reaction.service;
 
-import com.hsmchurch.app.security.account.entity.Account;
-import com.hsmchurch.app.security.account.service.AccountService;
+import com.hsmchurch.app.core.exceptions.NotFoundException;
 import com.hsmchurch.app.reaction.entity.*;
-import com.hsmchurch.app.video.entity.Video;
-import com.hsmchurch.app.video.api.dto.request.ReactionApplyForm;
-import com.hsmchurch.app.video.service.VideoService;
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.hsmchurch.app.video.api.dto.request.ReactionApplyRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import static com.hsmchurch.app.core.support.CrudStringFormat.DELETE_FAIL;
+
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class ReactionService {
-
+    private final static String ENTITY_NAME_REACTION = "리액션";
+    private final static String ENTITY_NAME_REACTION_HISTORY = "리액션";
     private final ReactionRepository reactionRepository;
     private final ReactionHistoryRepository reactionHistoryRepository;
-    private final VideoService videoService;
-    private final AccountService accountService;
-    private final JPAQueryFactory queryFactory;
-    private final static QReactionHistory Q_REACTION_HISTORY = QReactionHistory.reactionHistory;
 
-    public Reaction findById(Long reactionId) {
+    public Reaction findReactionById(final Long reactionId) {
         return reactionRepository.findById(reactionId)
-                .orElseThrow(() -> new RuntimeException("리액션을 찾을 수 없습니다."));
+                .orElseThrow(() -> new NotFoundException(ENTITY_NAME_REACTION, reactionId));
     }
 
-    public void applyReaction(final ReactionApplyForm applyForm) {
-        final Account account = accountService.findById(applyForm.getAccountId());
-        final Video video = videoService.findById(applyForm.getVideoId());
-        final Reaction reaction = findById(applyForm.getReactionId());
-        reactionHistoryRepository.save(ReactionHistory.of(reaction, account, video));
+    public ReactionHistory findReactionHistory(final ReactionHistoryId reactionHistoryId) {
+        return reactionHistoryRepository.findByReactionHistoryId(reactionHistoryId)
+                .orElseThrow(() -> new NotFoundException(ENTITY_NAME_REACTION_HISTORY, reactionHistoryId));
     }
 
-    public long cancelReaction(final ReactionApplyForm applyForm) {
-        return queryFactory.delete(Q_REACTION_HISTORY)
-                .where(
-                        Q_REACTION_HISTORY.video.id.eq(applyForm.getVideoId())
-                                .and(Q_REACTION_HISTORY.account.id.eq(applyForm.getAccountId()))
-                                .and(Q_REACTION_HISTORY.reaction.id.eq(applyForm.getReactionId()))
-                )
-                .execute();
+    public ReactionHistory applyReaction(final ReactionApplyRequest reactionApplyRequest) {
+        return reactionHistoryRepository.save(ReactionHistory.of(reactionApplyRequest));
     }
+
+    public boolean cancelReaction(final ReactionApplyRequest reactionCancelRequest) {
+        final ReactionHistoryId reactionHistoryId = new ReactionHistoryId(
+                reactionCancelRequest.getAccountId(),
+                reactionCancelRequest.getVideoId(),
+                reactionCancelRequest.getReactionId());
+        try {
+            findReactionHistory(reactionHistoryId).cancel();
+            return true;
+        } catch (NotFoundException e) {
+            log.error(DELETE_FAIL.apply(ENTITY_NAME_REACTION_HISTORY), reactionCancelRequest, e);
+            return false;
+        }
+    }
+
 }

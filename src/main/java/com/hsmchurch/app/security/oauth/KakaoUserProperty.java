@@ -4,13 +4,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Map;
 
-public class KakaoUserProperty implements SocialUserProperty{
+public class KakaoUserProperty implements SocialUserProperty {
 
-    @JsonProperty("kaccount_email")
-    private String email;
-
-    @JsonProperty("kaccount_email_verified")
-    private Boolean verified;
+    @JsonProperty("kakao_account")
+    private Map<String, String> accountInfo;
 
     @JsonProperty("id")
     private Long userUniqueId;
@@ -29,12 +26,28 @@ public class KakaoUserProperty implements SocialUserProperty{
     }
 
     @Override
-    public String getProfileHref() {
+    public String getProfileImage() {
         return userProperties.get("profile_image");
     }
 
     @Override
-    public String getEmail() {
-        return email;
+    public String getThumnailImage() {
+        return userProperties.get("thumnail_image");
     }
+
+    @Override
+    public String getGender() {
+        return accountInfo.get("gender");
+    }
+
+    @Override
+    public String getBirthDay() {
+        return accountInfo.get("birthday");
+    }
+
+    @Override
+    public String getAgeRange() {
+        return accountInfo.get("age_range");
+    }
+
 }

@@ -1,7 +1,7 @@
 package com.hsmchurch.app.security.oauth;
 
-import com.hsmchurch.app.security.account.entity.Account;
-import com.hsmchurch.app.security.account.entity.value.Role;
+import com.hsmchurch.app.account.entity.Account;
+import com.hsmchurch.app.account.entity.value.Role;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
