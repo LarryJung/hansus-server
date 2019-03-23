@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.support;
 
-import com.hsmchurch.app.video.entity.value.BibleContent;
+import com.hsmchurch.app.video.domain.BibleContent;
 import lombok.Value;
 
 import java.time.LocalDate;
@@ -13,7 +13,4 @@ public class DescriptionParseResult {
     private final String preacher;
     private final List<BibleContent> bibleContents;
 
-    public static DescriptionParseResult of(final String description) {
-        return null;
-    }
 }

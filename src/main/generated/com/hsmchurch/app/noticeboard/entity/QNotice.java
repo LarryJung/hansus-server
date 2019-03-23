@@ -16,7 +16,7 @@ import com.querydsl.core.types.dsl.PathInits;
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QNotice extends EntityPathBase<Notice> {
 
-    private static final long serialVersionUID = 119698724L;
+    private static final long serialVersionUID = -1133597372L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
@@ -45,7 +45,7 @@ public class QNotice extends EntityPathBase<Notice> {
     //inherited
     public final BooleanPath usable = _super.usable;
 
-    public final com.hsmchurch.app.account.entity.QAccount writer;
+    public final QWriter writer;
 
     public QNotice(String variable) {
         this(Notice.class, forVariable(variable), INITS);
@@ -65,7 +65,7 @@ public class QNotice extends EntityPathBase<Notice> {
 
     public QNotice(Class<? extends Notice> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.writer = inits.isInitialized("writer") ? new com.hsmchurch.app.account.entity.QAccount(forProperty("writer")) : null;
+        this.writer = inits.isInitialized("writer") ? new QWriter(forProperty("writer")) : null;
     }
 
 }

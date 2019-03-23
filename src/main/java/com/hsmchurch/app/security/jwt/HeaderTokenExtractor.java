@@ -20,16 +20,21 @@ public class HeaderTokenExtractor {
         log.info("path , method : {}, {} ", request.getPathInfo(), request.getMethod());
         String payload = request.getHeader("Authorization");
         if(StringUtils.isEmpty(payload)) {
-            throw new RuntimeException("토큰이 들어있지 않습니다.");
+            log.info("토큰이 들어있지 않습니다.");
+            return null;
         }
         if (payload.length() < HEADER_PREFIX.length()) {
-            throw new RuntimeException("토큰 길이가 유효하지 않습니다. : " + payload);
+            log.info("토큰 길이가 유효하지 않습니다. : " + payload);
+            return null;
         }
         return payload.substring(HEADER_PREFIX.length(), payload.length());
     }
 
     public Long extractId(HttpServletRequest request) {
         String token = extract(request);
+        if (token == null) {
+            return null;
+        }
         return jwtFactory.getIdFromToken(token);
     }
 

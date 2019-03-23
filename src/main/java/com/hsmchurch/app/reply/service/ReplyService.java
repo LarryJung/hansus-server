@@ -50,7 +50,12 @@ public class ReplyService {
     }
 
     public List<ReplyResponse> videoReplies(final Long videoId) {
-        return replyRepository.videoReplies(videoId);
+        final List<Reply> replies = replyRepository.findAllByVideoId(videoId);
+        if (replies.isEmpty()) {
+            log.error(READ_FAIL.apply(ENTITY_NAME), videoId, "찾을 수 없습니다.");
+            throw new NotFoundException(ENTITY_NAME, videoId);
+        }
+        return replies.stream().map(Reply::toResponse).collect(toList());
     }
 
     // 수정 삭제 권한에 대해서는 JWT에서 권한 필터링 처리를 할 수 있으므로 그렇게 하자. 내부에서 권한 검사를 할 경우에는 회원 서비스를 요청해야하므로..

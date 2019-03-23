@@ -1,7 +1,7 @@
 package com.hsmchurch.app.video.support;
 
-import com.hsmchurch.app.video.api.dto.request.ThumbNailForm;
-import com.hsmchurch.app.video.api.dto.request.YoutubeVideoInfo;
+import com.hsmchurch.app.video.ui.request.ThumbNailForm;
+import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;

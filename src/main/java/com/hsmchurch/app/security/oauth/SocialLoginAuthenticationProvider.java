@@ -1,9 +1,9 @@
 package com.hsmchurch.app.security.oauth;
 
-import com.hsmchurch.app.account.entity.Account;
-import com.hsmchurch.app.account.entity.AccountRepository;
-import com.hsmchurch.app.account.entity.value.AccountOrigin;
-import com.hsmchurch.app.account.entity.value.Role;
+import com.hsmchurch.app.account.domain.Account;
+import com.hsmchurch.app.account.domain.AccountRepository;
+import com.hsmchurch.app.account.domain.AccountOrigin;
+import com.hsmchurch.app.account.domain.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -39,7 +39,7 @@ public class SocialLoginAuthenticationProvider implements AuthenticationProvider
         log.info("properties : {}", property.getUserNickname());
         String socialId = property.getSocialId();
         SocialProviders provider = dto.getProvider();
-        log.info("userid / provider : {}, {}", socialId, provider.getUserinfoEndpoint());
+        log.info("userid, provider : {}, {}", socialId, provider.getUserinfoEndpoint());
         return accountRepository.findBySocialIdAndAccountOrigin(socialId, AccountOrigin.valueOf(provider.getProviderName()))
                 .orElseGet(() -> accountRepository.save(
                         Account.builder()

@@ -4,7 +4,7 @@ import com.hsmchurch.app.core.config.QuerydslConfiguration;
 import com.hsmchurch.app.reply.api.dto.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteRequest;
 import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteRequest;
-import com.hsmchurch.app.video.service.LikeTagService;
+import com.hsmchurch.app.video.application.LikeTagService;
 import lombok.NoArgsConstructor;
 import org.junit.Before;
 import org.junit.Test;

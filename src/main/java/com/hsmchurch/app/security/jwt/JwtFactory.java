@@ -1,7 +1,7 @@
 package com.hsmchurch.app.security.jwt;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.hsmchurch.app.account.entity.value.Role;
+import com.hsmchurch.app.account.domain.Role;
 import com.hsmchurch.app.security.oauth.PostAuthorizationToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Clock;
@@ -120,6 +120,7 @@ public class JwtFactory {
     }
 
     public Boolean isValidateToken(String token) {
+        log.info("request jwt token : {}", token);
         final Long id = getIdFromToken(token);
         if (id == null) {
             throw new RuntimeException("토큰의 계정 이름이 담겨있지 않습니다.");

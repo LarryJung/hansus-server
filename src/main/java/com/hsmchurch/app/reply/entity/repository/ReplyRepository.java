@@ -11,4 +11,6 @@ public interface ReplyRepository extends JpaRepository<Reply, Long>, ReplyReposi
 
     List<Reply> findAllByVideoIdAndReplier_Id(Long videoId, Long replierId);
 
+    List<Reply> findAllByVideoId(Long videoId);
+
 }
