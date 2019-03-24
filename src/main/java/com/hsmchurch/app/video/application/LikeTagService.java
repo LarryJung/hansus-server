@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.application;
 
-import com.hsmchurch.app.core.exceptions.NotFoundException;
+import com.hsmchurch.app.common.exceptions.NotFoundException;
 import com.hsmchurch.app.video.domain.LikeTag;
 import com.hsmchurch.app.video.domain.LikeTagId;
 import com.hsmchurch.app.video.domain.LikeTagRepository;
@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.hsmchurch.app.core.support.CrudStringFormat.CANCEL_FAIL;
+import static com.hsmchurch.app.common.support.CrudStringFormat.CANCEL_FAIL;
 
 @Slf4j
 @Service

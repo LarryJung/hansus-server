@@ -1,7 +1,7 @@
 package com.hsmchurch.app.account.domain;
 
 import com.hsmchurch.app.account.ui.response.AccountResponse;
-import com.hsmchurch.app.core.BaseEntity;
+import com.hsmchurch.app.common.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;

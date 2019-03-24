@@ -22,7 +22,7 @@ public class QReactionHistory extends EntityPathBase<ReactionHistory> {
 
     public static final QReactionHistory reactionHistory = new QReactionHistory("reactionHistory");
 
-    public final com.hsmchurch.app.core.QBaseEntity _super = new com.hsmchurch.app.core.QBaseEntity(this);
+    public final com.hsmchurch.app.common.QBaseEntity _super = new com.hsmchurch.app.common.QBaseEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;

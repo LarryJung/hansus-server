@@ -1,4 +1,4 @@
-package com.hsmchurch.app.core.config;
+package com.hsmchurch.app.common.config;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.context.annotation.Bean;

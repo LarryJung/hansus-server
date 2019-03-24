@@ -2,17 +2,19 @@
 spring:
   profiles: local
   datasource:
-    url: ${jdbc_database_url}
-    username: ${jdbc_database_username}
-    password: ${jdbc_database_password}
-    driver-class-name: 'com.mysql.cj.jdbc.Driver'
+    platform: h
+    hikari:
+      jdbc-url: ${jdbc_database_url}
+      username: ${jdbc_database_username}
+      password: ${jdbc_database_password}
+      driver-class-name: 'org.h2.Driver'
   jpa:
     properties:
       hibernate:
         show-sql: true
         hbm2ddl.auto: create
         format_sql: true
-    database-platform: org.hibernate.dialect.MySQL5Dialect
+    database-platform: H2
 
 youtube:
   key: ${youtube_client_key}

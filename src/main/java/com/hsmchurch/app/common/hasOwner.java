@@ -1,4 +1,4 @@
-package com.hsmchurch.app.core;
+package com.hsmchurch.app.common;
 
 public interface hasOwner {
 

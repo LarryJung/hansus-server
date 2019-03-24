@@ -1,7 +1,7 @@
 package com.hsmchurch.app.reply.entity;
 
-import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.core.hasOwner;
+import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.hasOwner;
 import com.hsmchurch.app.reply.api.dto.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.api.dto.response.ReplyResponse;
 

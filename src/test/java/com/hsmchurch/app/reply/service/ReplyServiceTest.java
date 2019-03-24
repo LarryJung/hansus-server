@@ -1,6 +1,6 @@
 package com.hsmchurch.app.reply.service;
 
-import com.hsmchurch.app.core.config.QuerydslConfiguration;
+import com.hsmchurch.app.common.config.QuerydslConfiguration;
 import com.hsmchurch.app.reply.api.dto.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteRequest;
 import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteRequest;

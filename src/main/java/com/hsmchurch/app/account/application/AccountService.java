@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.hsmchurch.app.core.support.CrudStringFormat.READ_FAIL;
+import static com.hsmchurch.app.common.support.CrudStringFormat.READ_FAIL;
 
 @Slf4j
 @Service

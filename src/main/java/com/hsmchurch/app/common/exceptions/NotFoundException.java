@@ -1,4 +1,4 @@
-package com.hsmchurch.app.core.exceptions;
+package com.hsmchurch.app.common.exceptions;
 
 public class NotFoundException extends RuntimeException{
 

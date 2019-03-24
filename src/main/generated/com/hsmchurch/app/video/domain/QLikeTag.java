@@ -1,4 +1,4 @@
-package com.hsmchurch.app.noticeboard.entity;
+package com.hsmchurch.app.video.domain;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,20 +11,18 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QNotice is a Querydsl query type for Notice
+ * QLikeTag is a Querydsl query type for LikeTag
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QNotice extends EntityPathBase<Notice> {
+public class QLikeTag extends EntityPathBase<LikeTag> {
 
-    private static final long serialVersionUID = -1133597372L;
+    private static final long serialVersionUID = -1211471445L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QNotice notice = new QNotice("notice");
+    public static final QLikeTag likeTag = new QLikeTag("likeTag");
 
     public final com.hsmchurch.app.common.QBaseEntity _super = new com.hsmchurch.app.common.QBaseEntity(this);
-
-    public final StringPath content = createString("content");
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
@@ -35,9 +33,7 @@ public class QNotice extends EntityPathBase<Notice> {
     //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
-    public final NumberPath<Long> id = createNumber("id", Long.class);
-
-    public final StringPath title = createString("title");
+    public final QLikeTagId likeTagId;
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
@@ -45,27 +41,25 @@ public class QNotice extends EntityPathBase<Notice> {
     //inherited
     public final BooleanPath usable = _super.usable;
 
-    public final QWriter writer;
-
-    public QNotice(String variable) {
-        this(Notice.class, forVariable(variable), INITS);
+    public QLikeTag(String variable) {
+        this(LikeTag.class, forVariable(variable), INITS);
     }
 
-    public QNotice(Path<? extends Notice> path) {
+    public QLikeTag(Path<? extends LikeTag> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QNotice(PathMetadata metadata) {
+    public QLikeTag(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QNotice(PathMetadata metadata, PathInits inits) {
-        this(Notice.class, metadata, inits);
+    public QLikeTag(PathMetadata metadata, PathInits inits) {
+        this(LikeTag.class, metadata, inits);
     }
 
-    public QNotice(Class<? extends Notice> type, PathMetadata metadata, PathInits inits) {
+    public QLikeTag(Class<? extends LikeTag> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.writer = inits.isInitialized("writer") ? new QWriter(forProperty("writer")) : null;
+        this.likeTagId = inits.isInitialized("likeTagId") ? new QLikeTagId(forProperty("likeTagId")) : null;
     }
 
 }

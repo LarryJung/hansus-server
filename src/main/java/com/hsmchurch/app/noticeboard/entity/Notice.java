@@ -1,7 +1,7 @@
 package com.hsmchurch.app.noticeboard.entity;
 
-import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.core.hasOwner;
+import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.hasOwner;
 import com.hsmchurch.app.noticeboard.dto.request.NoticeUpdateRequest;
 import com.hsmchurch.app.noticeboard.dto.request.NoticeUploadRequest;
 import com.hsmchurch.app.noticeboard.dto.response.NoticeResponse;

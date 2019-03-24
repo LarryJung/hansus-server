@@ -1,7 +1,7 @@
 package com.hsmchurch.app.reaction.entity;
 
-import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.core.hasOwner;
+import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.hasOwner;
 import com.hsmchurch.app.video.ui.request.ReactionApplyRequest;
 import lombok.NoArgsConstructor;
 

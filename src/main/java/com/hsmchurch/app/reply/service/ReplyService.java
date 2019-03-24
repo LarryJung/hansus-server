@@ -1,7 +1,7 @@
 package com.hsmchurch.app.reply.service;
 
-import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.core.exceptions.NotFoundException;
+import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.exceptions.NotFoundException;
 import com.hsmchurch.app.reply.api.dto.request.ReplyDeleteRequest;
 import com.hsmchurch.app.reply.api.dto.request.TargetVideoRepliesDeleteRequest;
 import com.hsmchurch.app.reply.entity.Reply;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-import static com.hsmchurch.app.core.support.CrudStringFormat.*;
+import static com.hsmchurch.app.common.support.CrudStringFormat.*;
 import static java.util.stream.Collectors.toList;
 
 @Slf4j

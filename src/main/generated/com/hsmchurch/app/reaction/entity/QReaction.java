@@ -19,7 +19,7 @@ public class QReaction extends EntityPathBase<Reaction> {
 
     public static final QReaction reaction = new QReaction("reaction");
 
-    public final com.hsmchurch.app.core.QBaseEntity _super = new com.hsmchurch.app.core.QBaseEntity(this);
+    public final com.hsmchurch.app.common.QBaseEntity _super = new com.hsmchurch.app.common.QBaseEntity(this);
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;

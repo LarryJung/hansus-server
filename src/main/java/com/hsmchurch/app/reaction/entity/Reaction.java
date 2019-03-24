@@ -1,6 +1,6 @@
 package com.hsmchurch.app.reaction.entity;
 
-import com.hsmchurch.app.core.BaseEntity;
+import com.hsmchurch.app.common.BaseEntity;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;

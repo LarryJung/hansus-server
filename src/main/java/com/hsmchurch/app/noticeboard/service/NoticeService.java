@@ -1,6 +1,6 @@
 package com.hsmchurch.app.noticeboard.service;
 
-import com.hsmchurch.app.core.exceptions.NotFoundException;
+import com.hsmchurch.app.common.exceptions.NotFoundException;
 import com.hsmchurch.app.noticeboard.entity.Notice;
 import com.hsmchurch.app.noticeboard.entity.NoticeRepository;
 import com.hsmchurch.app.noticeboard.dto.request.NoticeDeleteRequest;
@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.hsmchurch.app.core.support.CrudStringFormat.DELETE_FAIL;
+import static com.hsmchurch.app.common.support.CrudStringFormat.DELETE_FAIL;
 
 @Slf4j
 @Service

@@ -1,13 +1,13 @@
 package com.hsmchurch.app.reaction.service;
 
-import com.hsmchurch.app.core.exceptions.NotFoundException;
+import com.hsmchurch.app.common.exceptions.NotFoundException;
 import com.hsmchurch.app.reaction.entity.*;
 import com.hsmchurch.app.video.ui.request.ReactionApplyRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import static com.hsmchurch.app.core.support.CrudStringFormat.DELETE_FAIL;
+import static com.hsmchurch.app.common.support.CrudStringFormat.DELETE_FAIL;
 
 @Slf4j
 @Service

@@ -1,4 +1,4 @@
-package com.hsmchurch.app.core.support;
+package com.hsmchurch.app.common.support;
 
 import java.time.Instant;
 import java.time.LocalDateTime;

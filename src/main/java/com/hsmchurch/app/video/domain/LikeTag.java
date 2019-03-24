@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.domain;
 
-import com.hsmchurch.app.core.BaseEntity;
+import com.hsmchurch.app.common.BaseEntity;
 import com.hsmchurch.app.video.ui.request.LikeTagRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

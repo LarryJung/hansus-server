@@ -1,7 +1,7 @@
 package com.hsmchurch.app.video.domain;
 
-import com.hsmchurch.app.core.BaseEntity;
-import com.hsmchurch.app.core.support.AboutTimeHelper;
+import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.support.AboutTimeHelper;
 import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
 import com.hsmchurch.app.video.ui.response.VideoResponse;
 import com.hsmchurch.app.video.support.DescriptionParseResult;
