@@ -2,9 +2,9 @@ package com.hsmchurch.app.video.application;
 
 import com.hsmchurch.app.video.domain.Video;
 import com.hsmchurch.app.video.domain.VideoRepository;
-import com.hsmchurch.app.video.ui.response.VideoResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
@@ -20,17 +20,19 @@ public class VideoService {
     private final VideoRepository videoRepository;
     private final VideoSupportService videoSupportService;
 
-    public Page<VideoResponse> listOfVideo(final Pageable pageable) {
-        return videoRepository.findAll(pageable).map(Video::toResponseDto);
+    public Page<Video> listOfVideo(final Pageable pageable) {
+        return videoRepository.findAll(pageable);
     }
 
-    public List<VideoResponse> likeList(final Long accountId) {
-        final List<Long> videoIds = videoSupportService.likeList(accountId);
+    public PageImpl<Video> likeList(final Long accountId,
+                                    final Pageable pageable) {
+        final Page<Long> videoIds = videoSupportService.likeList(accountId, pageable);
 
-        return videoRepository.findAllById(videoIds).stream()
-                .map(Video::toResponseDto)
-                .sorted(Comparator.comparing(VideoResponse::getFilmedAt).reversed())
+        final List<Video> videos = videoRepository.findAllById(videoIds).stream()
+                .sorted(Comparator.comparing(Video::getFilmedAt).reversed())
                 .collect(toList());
+
+        return new PageImpl<>(videos, pageable, videoIds.getTotalElements());
     }
 
     public Video findById(final Long id) {

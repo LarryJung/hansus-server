@@ -62,6 +62,9 @@ public class Account extends BaseEntity {
                 .id(this.id)
                 .name(this.name)
                 .role(this.role)
+                .accountOrigin(this.accountOrigin)
+                .gender(this.gender)
+                .birthday(this.birthday)
                 .build();
     }
 

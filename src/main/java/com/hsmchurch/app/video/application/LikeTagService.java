@@ -7,6 +7,8 @@ import com.hsmchurch.app.video.domain.LikeTagRepository;
 import com.hsmchurch.app.video.ui.request.LikeTagRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -35,12 +37,15 @@ public class LikeTagService {
         }
     }
 
-    public List<LikeTag> findAllByAccountId(final Long accountId) {
-        return likeTagRepository.findAllByLikeTagId_AccountId(accountId);
+    public Page<LikeTag> findAllByAccountId(final Long accountId,
+                                            final Pageable pageable) {
+        return likeTagRepository.findAllByLikeTagId_AccountId(accountId, pageable);
     }
 
-    public LikeTag findBy(final Long videoId, final Long accountId) {
+    public LikeTag findBy(final Long videoId,
+                          final Long accountId) {
         final LikeTagId id = new LikeTagId(videoId, accountId);
+
         return likeTagRepository.findByLikeTagId(id)
                 .orElseThrow(() -> new NotFoundException("좋아요 태그", id));
     }
