@@ -1,16 +1,18 @@
 package com.hsmchurch.app.reply.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
-import com.hsmchurch.app.common.hasOwner;
+import com.hsmchurch.app.common.Feedable;
+import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.ui.response.ReplyResponse;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table(name = "replies")
 @Entity
-public class Reply extends BaseEntity implements hasOwner {
+public class Reply extends BaseEntity implements HasOwner, Feedable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -51,17 +53,13 @@ public class Reply extends BaseEntity implements hasOwner {
 
     public static Reply of(final Long videoId,
                            final Long replierId,
-                           final String replierName,
                            final String content) {
-        return new Reply(videoId, new Replier(replierId, replierName), content);
+        return new Reply(videoId, new Replier(replierId), content);
     }
 
-    public static Reply of(final ReplyApplyRequest replyApplyRequest) {
-        return Reply.of(
-                replyApplyRequest.getVideoId(),
-                replyApplyRequest.getReplierId(),
-                replyApplyRequest.getReplierName(),
-                replyApplyRequest.getContent());
+    public static Reply of(final ReplyApplyRequest replyApplyRequest,
+                           final Long replierId) {
+        return Reply.of(replyApplyRequest.getVideoId(), replierId, replyApplyRequest.getContent());
     }
 
     public ReplyResponse toResponse() {
@@ -101,5 +99,18 @@ public class Reply extends BaseEntity implements hasOwner {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id, content, videoId, replier);
+    }
+
+    public boolean checkAndDelete(final Long replierId) {
+        if (isOwner(replierId)) {
+            markAsDeleted();
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public LocalDateTime feed_created_at() {
+        return getCreatedAt();
     }
 }

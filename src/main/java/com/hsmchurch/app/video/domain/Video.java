@@ -1,6 +1,7 @@
 package com.hsmchurch.app.video.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
+import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.support.AboutTimeHelper;
 import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
 import com.hsmchurch.app.video.ui.response.VideoResponse;
@@ -22,7 +23,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Table(name = "videos")
 @Entity
-public class Video extends BaseEntity {
+public class Video extends BaseEntity implements Feedable {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)
@@ -105,5 +106,10 @@ public class Video extends BaseEntity {
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), id, videoType, filmedAt, title, preacher, bibleContents, youtubeId, youtubePublishedAt, thumbnail);
+    }
+
+    @Override
+    public LocalDateTime feed_created_at() {
+        return getCreatedAt();
     }
 }

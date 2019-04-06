@@ -15,13 +15,8 @@ public class Replier {
     @Column(name = "replier_id")
     private Long id;
 
-    @Column(name = "replier_name")
-    private String name;
-
-    public Replier(final Long id,
-                   final String name) {
+    public Replier(final Long id) {
         this.id = id;
-        this.name = name;
     }
 
     public boolean isYou(final Long replierId) {
@@ -33,13 +28,12 @@ public class Replier {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Replier replier = (Replier) o;
-        return Objects.equals(id, replier.id) &&
-                Objects.equals(name, replier.name);
+        return Objects.equals(id, replier.id);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name);
+        return Objects.hash(id);
     }
 
 }

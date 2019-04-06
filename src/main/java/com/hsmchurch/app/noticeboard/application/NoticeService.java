@@ -13,18 +13,23 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 import static com.hsmchurch.app.common.support.CrudStringFormat.DELETE_FAIL;
 
 @Slf4j
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class NoticeService {
 
     private final static String ENTITY_NAME = "게시글";
     private final NoticeRepository noticeRepository;
+    private final NoticeWriterApiService noticeWriterApiService;
 
-    public Notice upload(final NoticeUploadRequest noticeUploadRequest) {
-        return noticeRepository.save(Notice.of(noticeUploadRequest));
+    public Notice upload(final NoticeUploadRequest noticeUploadRequest,
+                         final Long writerId) {
+        return noticeRepository.save(Notice.of(noticeUploadRequest, writerId));
     }
 
     public Notice findById(final Long noticeId) {
@@ -32,17 +37,29 @@ public class NoticeService {
                 .orElseThrow(() -> new NotFoundException(ENTITY_NAME, noticeId));
     }
 
-    public Notice updateNotice(final NoticeUpdateRequest noticeUpdateRequest) {
-        final Notice notice = findById(noticeUpdateRequest.getBoardId()).update(noticeUpdateRequest);
+    public Notice updateNotice(final NoticeUpdateRequest noticeUpdateRequest,
+                               final Long boardId,
+                               final Long writerId) {
+        final Notice notice = findById(boardId).update(noticeUpdateRequest, writerId);
         return noticeRepository.save(notice);
     }
 
-    public boolean delete(final NoticeDeleteRequest noticeDeleteRequest) {
+    public boolean delete(final Long boardId) {
         try {
-            findById(noticeDeleteRequest.getBoardId()).markAsDeleted();
+            findById(boardId).markAsDeleted();
             return true;
         } catch (NotFoundException e) {
-            log.error(DELETE_FAIL.apply(ENTITY_NAME), noticeDeleteRequest, e);
+            log.error(DELETE_FAIL.apply(ENTITY_NAME), boardId, e);
+            return false;
+        }
+    }
+
+    public boolean delete(final Long boardId,
+                          final Long writerId) {
+        try {
+            return findById(boardId).checkAndDelete(writerId);
+        } catch (NotFoundException e) {
+            log.error(DELETE_FAIL.apply(ENTITY_NAME), boardId, e);
             return false;
         }
     }

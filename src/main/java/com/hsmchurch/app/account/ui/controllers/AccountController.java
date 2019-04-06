@@ -19,9 +19,9 @@ public class AccountController {
 
     private final AccountService accountService;
 
-    @GetMapping("/{userId}")
-    public ResponseEntity<AccountResponse> getOneById(@PathVariable final Long userId) {
-        final AccountResponse accountResponse = accountService.findById(userId).toResponse();
+    @GetMapping("/{id}")
+    public ResponseEntity<AccountResponse> getOneById(@PathVariable final Long id) {
+        final AccountResponse accountResponse = accountService.findById(id).toResponse();
         return ResponseEntity.ok(accountResponse);
     }
 
@@ -31,8 +31,6 @@ public class AccountController {
                 .map(Account::toResponse).collect(toList());
         return ResponseEntity.ok(accountResponses);
     }
-
-//    me api 추가
 
 }
 

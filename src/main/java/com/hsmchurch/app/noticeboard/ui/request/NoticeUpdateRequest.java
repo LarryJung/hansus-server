@@ -1,25 +1,22 @@
 package com.hsmchurch.app.noticeboard.ui.request;
 
-import lombok.Value;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Value
+@Data
+@NoArgsConstructor
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class NoticeUpdateRequest {
 
-    final private Long boardId;
+    private String title;
 
-    final private String title;
+    private String content;
 
-    final private String content;
-
-    final private Long writerId;
-
-    public NoticeUpdateRequest(final Long boardId,
-                               final String title,
-                               final String content,
-                               final Long writerId) {
-        this.boardId = boardId;
+    public NoticeUpdateRequest(final String title,
+                               final String content) {
         this.title = title;
         this.content = content;
-        this.writerId = writerId;
     }
 }

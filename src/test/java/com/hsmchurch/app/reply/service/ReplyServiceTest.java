@@ -31,19 +31,24 @@ public class ReplyServiceTest {
     private static Long ACCOUNT_ID = 1L;
     private static Long VIDEO_ID = 1L;
 
-    @Before
-    public void setUp() {
-        String ACCOUNT_NAME = "test-user";
-        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.1"));
-        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.2"));
-        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.3"));
+    @Test
+    public void name() {
+
     }
+
+    //    @Before
+//    public void setUp() {
+//        String ACCOUNT_NAME = "test-user";
+//        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.1"));
+//        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.2"));
+//        replyService.apply(new ReplyApplyRequest(ACCOUNT_ID, ACCOUNT_NAME, VIDEO_ID, "좋습니다.3"));
+//    }
 
 //    @Test
 //    public void deleteExceptionTest_Success() {
 //        final Long replyId = replyService.findAllByWriter(1L, null).get(0).getId();
 //        final ReplyDeleteRequest replyDeleteRequest = new ReplyDeleteRequest(replyId, ACCOUNT_ID);
-//        boolean result = replyService.deleteReply(replyDeleteRequest);
+//        boolean result = replyService.forceDeleteReply(replyDeleteRequest);
 //        assertTrue(result);
 //    }
 //
@@ -51,21 +56,21 @@ public class ReplyServiceTest {
 //    public void deleteExceptionTest_Fail() {
 //        final Long replyId = replyService.findAllByWriter(1L).get(0).getId();
 //        final ReplyDeleteRequest replyDeleteRequest = new ReplyDeleteRequest(999L, ACCOUNT_ID);
-//        boolean result = replyService.deleteReply(replyDeleteRequest);
+//        boolean result = replyService.forceDeleteReply(replyDeleteRequest);
 //        assertFalse(result);
 //    }
 
-    @Test
-    public void deleteAllByWriterAndVideo_Success() {
-        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, ACCOUNT_ID);
-        boolean result = replyService.deleteReplies(deleteForm);
-        assertTrue(result);
-    }
-
-    @Test
-    public void deleteAllByWriterAndVideo_Fail() {
-        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, 999L);
-        boolean result = replyService.deleteReplies(deleteForm);
-        assertFalse(result);
-    }
+//    @Test
+//    public void deleteAllByWriterAndVideo_Success() {
+//        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, ACCOUNT_ID);
+//        boolean result = replyService.deleteReplies(deleteForm);
+//        assertTrue(result);
+//    }
+//
+//    @Test
+//    public void deleteAllByWriterAndVideo_Fail() {
+//        final TargetVideoRepliesDeleteRequest deleteForm = new TargetVideoRepliesDeleteRequest(VIDEO_ID, 999L);
+//        boolean result = replyService.deleteReplies(deleteForm);
+//        assertFalse(result);
+//    }
 }

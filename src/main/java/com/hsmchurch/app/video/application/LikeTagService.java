@@ -49,4 +49,8 @@ public class LikeTagService {
         return likeTagRepository.findByLikeTagId(id)
                 .orElseThrow(() -> new NotFoundException("좋아요 태그", id));
     }
+
+    public List<LikeTag> findByVideoId(final Long videoId) {
+        return likeTagRepository.findAllByLikeTagId_VideoId(videoId);
+    }
 }

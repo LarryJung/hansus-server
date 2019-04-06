@@ -1,12 +1,19 @@
 package com.hsmchurch.app.noticeboard.ui.request;
 
-import lombok.Value;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+import lombok.Data;
 
-@Value
+@Data
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class NoticeDeleteRequest {
 
-    final private Long boardId;
+    private Long boardId;
+    private Long writerId;
 
-    final private Long writerId;
-
+    public NoticeDeleteRequest(final Long boardId,
+                               final Long writerId) {
+        this.boardId = boardId;
+        this.writerId = writerId;
+    }
 }

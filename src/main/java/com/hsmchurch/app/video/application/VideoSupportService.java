@@ -13,7 +13,7 @@ public class VideoSupportService {
     private final LikeTagService likeTagService;
 
     public Page<Long> likeList(final Long accountId,
-                                  final Pageable pageable) {
+                               final Pageable pageable) {
         final Page<Long> videoIds = likeTagService.findAllByAccountId(accountId, pageable)
                 .map(LikeTag::getVideoId);
 

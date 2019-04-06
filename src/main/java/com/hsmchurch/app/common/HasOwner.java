@@ -1,6 +1,6 @@
 package com.hsmchurch.app.common;
 
-public interface hasOwner {
+public interface HasOwner {
 
     boolean isOwner(final Long writerId);
 

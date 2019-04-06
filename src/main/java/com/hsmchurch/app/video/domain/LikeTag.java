@@ -29,6 +29,10 @@ public class LikeTag extends BaseEntity {
     }
 
     public Long getVideoId() {
-        return likeTagId.getVideoId();
+        return getVideoId();
+    }
+
+    public Long getWriterId() {
+        return getWriterId();
     }
 }
