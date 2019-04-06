@@ -4,7 +4,7 @@ import com.hsmchurch.app.video.application.LikeTagService;
 import com.hsmchurch.app.video.application.VideoService;
 import com.hsmchurch.app.video.domain.Video;
 import com.hsmchurch.app.video.ui.request.LikeTagRequest;
-import com.hsmchurch.app.video.ui.response.VideoResponse;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,8 +22,8 @@ public class MeVideoController {
     private final LikeTagService likeTagService;
 
     @GetMapping("/like")
-    ResponseEntity<Page<VideoResponse>> findAllLikedList(Pageable pageable) {
-        final Page<VideoResponse> result = videoService.likeList(currentUserId(), pageable)
+    ResponseEntity<Page<VideoListResponse>> findAllLikedList(Pageable pageable) {
+        final Page<VideoListResponse> result = videoService.likeList(currentUserId(), pageable)
                 .map(Video::toResponseDto);
 
         return ResponseEntity.ok(result);

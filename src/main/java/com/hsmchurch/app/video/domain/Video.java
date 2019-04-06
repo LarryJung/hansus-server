@@ -4,9 +4,12 @@ import com.hsmchurch.app.common.BaseEntity;
 import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.support.AboutTimeHelper;
 import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
-import com.hsmchurch.app.video.ui.response.VideoResponse;
+import com.hsmchurch.app.video.ui.response.LikeUser;
+import com.hsmchurch.app.video.ui.response.ReplyForVideo;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import com.hsmchurch.app.video.support.DescriptionParseResult;
 import com.hsmchurch.app.video.support.DescriptionParser;
+import com.hsmchurch.app.video.ui.response.VideoDetailResponse;
 import lombok.*;
 
 import javax.persistence.*;
@@ -55,6 +58,11 @@ public class Video extends BaseEntity implements Feedable {
     @Embedded
     private Thumbnail thumbnail;
 
+    @Override
+    public LocalDateTime feed_created_at() {
+        return getCreatedAt();
+    }
+
     public static Video from(final YoutubeVideoInfo youtubeVideoInfo, final DescriptionParser descriptionParser) {
         final DescriptionParseResult parsedResult = youtubeVideoInfo.parseDescription(descriptionParser);
         return Video.builder()
@@ -73,8 +81,8 @@ public class Video extends BaseEntity implements Feedable {
                 .build();
     }
 
-    public VideoResponse toResponseDto() {
-        return VideoResponse.builder()
+    public VideoListResponse toResponseDto() {
+        return VideoListResponse.builder()
                 .id(this.id)
                 .filmedAt(this.filmedAt)
                 .videoType(this.videoType)
@@ -83,6 +91,7 @@ public class Video extends BaseEntity implements Feedable {
                 .title(this.title)
                 .preacher(this.preacher)
                 .bibleContents(this.bibleContents)
+                .thumbnail(this.thumbnail)
                 .build();
     }
 
@@ -108,8 +117,19 @@ public class Video extends BaseEntity implements Feedable {
         return Objects.hash(super.hashCode(), id, videoType, filmedAt, title, preacher, bibleContents, youtubeId, youtubePublishedAt, thumbnail);
     }
 
-    @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
+    public VideoDetailResponse toDetailResponseDto(final List<LikeUser> likeUsers,
+                                                   final List<ReplyForVideo> replies) {
+        return VideoDetailResponse.builder()
+                .id(id)
+                .bibleContents(bibleContents)
+                .filmedAt(filmedAt)
+                .preacher(preacher)
+                .title(title)
+                .videoType(videoType)
+                .youtubeId(youtubeId)
+                .youtubePublishedAt(youtubePublishedAt)
+                .likeUsers(likeUsers)
+                .replies(replies)
+                .build();
     }
 }

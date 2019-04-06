@@ -2,7 +2,8 @@ package com.hsmchurch.app.video.ui.controllers;
 
 import com.hsmchurch.app.video.application.VideoService;
 import com.hsmchurch.app.video.domain.Video;
-import com.hsmchurch.app.video.ui.response.VideoResponse;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
+import com.hsmchurch.app.video.ui.response.VideoDetailResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,16 +17,17 @@ public class VideoController {
 
     private final VideoService videoService;
 
+    // 비디오 상세 조회 (실제 시용예정)
     @GetMapping("/{id}")
-    public ResponseEntity<VideoResponse> findOne(@PathVariable Long id) {
-        final VideoResponse videoResponse = videoService.findById(id).toResponseDto();
-
-        return ResponseEntity.ok(videoResponse);
+    public ResponseEntity<VideoDetailResponse> findOneDetails(@PathVariable Long id) {
+        final VideoDetailResponse videoDetailResponse = videoService.findDetailById(id);
+        return ResponseEntity.ok(videoDetailResponse);
     }
 
+    // 비디오 목록 조회
     @GetMapping
-    public ResponseEntity<Page<VideoResponse>> findAll(Pageable pageable) {
-        final Page<VideoResponse> result = videoService.listOfVideo(pageable).map(Video::toResponseDto);
+    public ResponseEntity<Page<VideoListResponse>> findAll(Pageable pageable) {
+        final Page<VideoListResponse> result = videoService.listOfVideo(pageable).map(Video::toResponseDto);
 
         return ResponseEntity.ok(result);
     }

@@ -5,6 +5,7 @@ import com.hsmchurch.app.video.domain.LikeTag;
 import com.hsmchurch.app.video.domain.LikeTagId;
 import com.hsmchurch.app.video.domain.LikeTagRepository;
 import com.hsmchurch.app.video.ui.request.LikeTagRequest;
+import com.hsmchurch.app.video.ui.response.LikeUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -52,5 +53,9 @@ public class LikeTagService {
 
     public List<LikeTag> findByVideoId(final Long videoId) {
         return likeTagRepository.findAllByLikeTagId_VideoId(videoId);
+    }
+
+    public List<LikeUser> findAllByVideo(final Long videoId) {
+        return likeTagRepository.findAllByVideo(videoId);
     }
 }

@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.application;
 
-import com.hsmchurch.app.video.ui.response.VideoResponse;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import com.hsmchurch.app.video.domain.Video;
 import com.hsmchurch.app.video.domain.VideoRepository;
 import com.hsmchurch.app.video.support.DescriptionParser;
@@ -23,7 +23,7 @@ public class YoutubeCrawlingService {
     private final YoutubeCrawler youtubeCrawler;
     private final DescriptionParser descriptionParser;
 
-    public Optional<List<VideoResponse>> updateVideos() {
+    public Optional<List<VideoListResponse>> updateVideos() {
         try {
             final List<Video> result = youtubeCrawler.collectInfos(null, new ArrayList<>()).stream()
                     .map(info -> Video.from(info, descriptionParser)).collect(toList());

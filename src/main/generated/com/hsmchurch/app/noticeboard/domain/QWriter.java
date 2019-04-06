@@ -21,8 +21,6 @@ public class QWriter extends BeanPath<Writer> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath name = createString("name");
-
     public QWriter(String variable) {
         super(Writer.class, forVariable(variable));
     }

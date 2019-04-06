@@ -1,6 +1,7 @@
 package com.hsmchurch.app.video.ui.response;
 
 import com.hsmchurch.app.video.domain.BibleContent;
+import com.hsmchurch.app.video.domain.Thumbnail;
 import com.hsmchurch.app.video.domain.VideoType;
 import lombok.Builder;
 import lombok.Value;
@@ -11,22 +12,16 @@ import java.util.List;
 
 @Builder
 @Value
-public class VideoResponse {
+public class VideoListResponse {
 
     private final Long id;
-
     private final String youtubeId;
-
     private final VideoType videoType;
-
-    private LocalDateTime youtubePublishedAt;
-
-    private LocalDate filmedAt;
-
-    private String title;
-
-    private String preacher;
-
-    private List<BibleContent> bibleContents;
+    private final LocalDateTime youtubePublishedAt;
+    private final LocalDate filmedAt;
+    private final String title;
+    private final String preacher;
+    private final List<BibleContent> bibleContents;
+    private final Thumbnail thumbnail;
 
 }

@@ -21,8 +21,6 @@ public class QReplier extends BeanPath<Replier> {
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath name = createString("name");
-
     public QReplier(String variable) {
         super(Replier.class, forVariable(variable));
     }

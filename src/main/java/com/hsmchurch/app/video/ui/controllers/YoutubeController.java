@@ -1,6 +1,6 @@
 package com.hsmchurch.app.video.ui.controllers;
 
-import com.hsmchurch.app.video.ui.response.VideoResponse;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import com.hsmchurch.app.video.application.YoutubeCrawlingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +15,7 @@ public class YoutubeController {
     private final YoutubeCrawlingService youtubeCrawlingService;
 
     @PostMapping("/batch/youtube")
-    public List<VideoResponse> parsing() {
+    public List<VideoListResponse> parsing() {
         return youtubeCrawlingService.updateVideos()
                 .orElseThrow(() -> new RuntimeException("영상 업데이트에 실패했습니다."));
     }

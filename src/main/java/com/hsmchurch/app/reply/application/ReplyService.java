@@ -7,6 +7,7 @@ import com.hsmchurch.app.reply.domain.ReplyRepository;
 import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.ui.request.ReplyUpdateRequest;
 import com.hsmchurch.app.reply.ui.response.ReplyResponse;
+import com.hsmchurch.app.video.ui.response.ReplyForVideo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -98,5 +99,9 @@ public class ReplyService {
 
     public List<Reply> findAllByVideo(final Long videoId) {
         return replyRepository.findAllByVideoId(videoId);
+    }
+
+    public List<ReplyForVideo> findAllByVideo2(final Long videoId) {
+        return replyRepository.videoReplies(videoId);
     }
 }
