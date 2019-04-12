@@ -6,7 +6,8 @@ import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUpdateRequest;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUploadRequest;
 import com.hsmchurch.app.noticeboard.ui.response.NoticeResponse;
-import com.hsmchurch.app.noticeboard.ui.response.NoticeResponseForList;
+import com.hsmchurch.app.noticeboard.ui.response.NoticeListResponse;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -17,6 +18,7 @@ import java.time.LocalDateTime;
 import static javax.persistence.GenerationType.IDENTITY;
 
 @Slf4j
+@Getter
 @NoArgsConstructor
 @Table(name = "notices")
 @Entity
@@ -62,29 +64,12 @@ public class Notice extends BaseEntity implements HasOwner, Feedable {
         return this.writer.isYou(writerId);
     }
 
-    public NoticeResponse toResponse() {
-        return NoticeResponse.builder()
-                .id(this.id)
-                .title(this.title)
-                .content(this.content)
-                .writer(this.writer)
-                .build();
-    }
-
     public boolean checkAndDelete(final Long writerId) {
         if (isOwner(writerId)) {
             markAsDeleted();
             return true;
         }
         return false;
-    }
-
-    public NoticeResponseForList toResponseForList() {
-        return NoticeResponseForList.builder()
-                .id(this.id)
-                .title(this.title)
-                .writer(this.writer)
-                .build();
     }
 
     @Override

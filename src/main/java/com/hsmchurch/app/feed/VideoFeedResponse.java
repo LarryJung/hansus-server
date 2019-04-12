@@ -1,7 +1,5 @@
-package com.hsmchurch.app.video.ui.response;
+package com.hsmchurch.app.feed;
 
-import com.hsmchurch.app.feed.FeedType;
-import com.hsmchurch.app.feed.VideoFeedResponse;
 import com.hsmchurch.app.video.domain.BibleContent;
 import com.hsmchurch.app.video.domain.Thumbnail;
 import com.hsmchurch.app.video.domain.VideoType;
@@ -14,8 +12,9 @@ import java.util.List;
 
 @Builder
 @Value
-public class VideoListResponse {
+public class VideoFeedResponse implements FeedResponse {
 
+    private final FeedType feedType;
     private final Long id;
     private final String youtubeId;
     private final VideoType videoType;
@@ -26,17 +25,8 @@ public class VideoListResponse {
     private final List<BibleContent> bibleContents;
     private final Thumbnail thumbnail;
 
-    public VideoFeedResponse toFeed() {
-        return VideoFeedResponse.builder()
-                .feedType(FeedType.VIDEO)
-                .youtubeId(youtubeId)
-                .videoType(videoType)
-                .youtubePublishedAt(youtubePublishedAt)
-                .filmedAt(filmedAt)
-                .title(title)
-                .preacher(preacher)
-                .bibleContents(bibleContents)
-                .thumbnail(thumbnail)
-                .build();
+    @Override
+    public LocalDateTime getCreatedAt() {
+        return youtubePublishedAt;
     }
 }

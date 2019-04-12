@@ -85,12 +85,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private HttpSecurity setLocalMode(HttpSecurity http) throws Exception {
         http
-                .headers().frameOptions().sameOrigin()
-                .and().csrf().disable();
+                .headers().frameOptions().sameOrigin();
         http
                 .authorizeRequests()
-                .antMatchers("/", "/me", "/h2-console/**", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon.ico").permitAll()
-                .and();
+                .antMatchers("/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/h2-console/**", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
+                .and().csrf().disable();
 
         return http;
     }

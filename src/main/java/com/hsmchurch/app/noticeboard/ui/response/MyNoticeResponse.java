@@ -1,17 +1,14 @@
 package com.hsmchurch.app.noticeboard.ui.response;
 
-import com.hsmchurch.app.noticeboard.domain.Writer;
 import lombok.Builder;
 import lombok.Value;
 
-@Builder
 @Value
-public class NoticeResponseForList {
+@Builder
+public class MyNoticeResponse {
 
     private final Long id;
-
     private final String title;
-
-    private final Writer writer;
+    private final String content; // 단순 글이 아닐 것이므로 향후 객체화 가능
 
 }

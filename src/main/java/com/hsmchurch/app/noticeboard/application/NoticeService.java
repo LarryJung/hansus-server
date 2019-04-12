@@ -3,7 +3,6 @@ package com.hsmchurch.app.noticeboard.application;
 import com.hsmchurch.app.common.exceptions.NotFoundException;
 import com.hsmchurch.app.noticeboard.domain.Notice;
 import com.hsmchurch.app.noticeboard.domain.NoticeRepository;
-import com.hsmchurch.app.noticeboard.ui.request.NoticeDeleteRequest;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUpdateRequest;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUploadRequest;
 import com.hsmchurch.app.noticeboard.ui.response.NoticeResponse;
@@ -15,6 +14,9 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 import static com.hsmchurch.app.common.support.CrudStringFormat.DELETE_FAIL;
 
 @Slf4j
@@ -25,7 +27,6 @@ public class NoticeService {
 
     private final static String ENTITY_NAME = "게시글";
     private final NoticeRepository noticeRepository;
-    private final NoticeWriterApiService noticeWriterApiService;
 
     public Notice upload(final NoticeUploadRequest noticeUploadRequest,
                          final Long writerId) {
@@ -35,6 +36,10 @@ public class NoticeService {
     public Notice findById(final Long noticeId) {
         return noticeRepository.findById(noticeId)
                 .orElseThrow(() -> new NotFoundException(ENTITY_NAME, noticeId));
+    }
+
+    public NoticeResponse findById2(final Long noticeId) {
+        return noticeRepository.findOneWithWriterName(noticeId);
     }
 
     public Notice updateNotice(final NoticeUpdateRequest noticeUpdateRequest,
@@ -64,7 +69,8 @@ public class NoticeService {
         }
     }
 
-    public Page<Notice> findAll(Pageable pageable) {
-        return noticeRepository.findAll(pageable);
+    public Page<NoticeResponse> findListAll(final Pageable pageable) {
+        return noticeRepository.findListAll(pageable);
     }
+
 }
