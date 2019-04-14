@@ -30,7 +30,7 @@ public class SwaggerConfig {
         return new ApiInfo(
                 "HSM project Api Docs",
                 "Hansomang application api documentation.",
-                "0.7",
+                "0.6",
                 "terms",
                 new Contact("Larry Jung", "https://github.com/larryjung", "charryhub@gmail.com"),
                 "License of API", "API license URL", Collections.emptyList());
