@@ -14,9 +14,6 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 import static com.hsmchurch.app.common.support.CrudStringFormat.DELETE_FAIL;
 
 @Slf4j
