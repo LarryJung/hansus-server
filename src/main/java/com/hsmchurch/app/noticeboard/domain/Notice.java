@@ -5,14 +5,11 @@ import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUpdateRequest;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUploadRequest;
-import com.hsmchurch.app.noticeboard.ui.response.NoticeResponse;
-import com.hsmchurch.app.noticeboard.ui.response.NoticeListResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
-
 import java.time.LocalDateTime;
 
 import static javax.persistence.GenerationType.IDENTITY;

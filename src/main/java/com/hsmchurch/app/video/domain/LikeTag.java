@@ -5,7 +5,9 @@ import com.hsmchurch.app.video.ui.request.LikeTagRequest;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 @Getter
 @NoArgsConstructor
@@ -29,10 +31,10 @@ public class LikeTag extends BaseEntity {
     }
 
     public Long getVideoId() {
-        return getVideoId();
+        return likeTagId.getVideoId();
     }
 
     public Long getWriterId() {
-        return getWriterId();
+        return likeTagId.getAccountId();
     }
 }

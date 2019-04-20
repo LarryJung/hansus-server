@@ -2,11 +2,8 @@ package com.hsmchurch.app.reply.service;
 
 import com.hsmchurch.app.common.config.QuerydslConfiguration;
 import com.hsmchurch.app.reply.application.ReplyService;
-import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
-import com.hsmchurch.app.reply.ui.request.TargetVideoRepliesDeleteRequest;
 import com.hsmchurch.app.video.application.LikeTagService;
 import lombok.NoArgsConstructor;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @NoArgsConstructor

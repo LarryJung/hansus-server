@@ -10,6 +10,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+import static java.util.Collections.emptyList;
+
 @Repository
 @Transactional
 public class LikeTagRepositoryImpl extends QuerydslRepositorySupport implements LikeTagRepositoryCustom {
@@ -25,8 +27,8 @@ public class LikeTagRepositoryImpl extends QuerydslRepositorySupport implements 
     }
 
     @Override
-    public List<LikeUser> findAllByVideo(final Long video) {
-        return queryFactory.from(likeTag)
+    public List<LikeUser> findAllByVideo(final long video) {
+        List<LikeUser> result =  queryFactory.from(likeTag)
                 .select(Projections.fields(LikeUser.class,
                         account.id.as("userId"),
                         account.name.as("userName"))
@@ -34,5 +36,6 @@ public class LikeTagRepositoryImpl extends QuerydslRepositorySupport implements 
                 .join(likeTag).on(likeTag.likeTagId.accountId.eq(account.id))
                 .where(likeTag.likeTagId.videoId.eq(video))
                 .fetch();
+        return result != null ? result : emptyList();
     }
 }

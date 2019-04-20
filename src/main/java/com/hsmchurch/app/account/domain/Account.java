@@ -2,11 +2,13 @@ package com.hsmchurch.app.account.domain;
 
 import com.hsmchurch.app.account.ui.response.AccountResponse;
 import com.hsmchurch.app.common.BaseEntity;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-
 import java.util.Objects;
 
 import static javax.persistence.GenerationType.IDENTITY;

@@ -3,9 +3,10 @@ package com.hsmchurch.app.reply.domain;
 import com.hsmchurch.app.common.BaseEntity;
 import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.HasOwner;
-import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
-import com.hsmchurch.app.reply.ui.response.ReplyResponse;
+import com.hsmchurch.app.reply.ui.ReplyApplyRequest;
+import com.hsmchurch.app.reply.ui.ResponseDtos;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -62,13 +63,9 @@ public class Reply extends BaseEntity implements HasOwner, Feedable {
         return Reply.of(replyApplyRequest.getVideoId(), replierId, replyApplyRequest.getContent());
     }
 
-    public ReplyResponse toResponse() {
-        return ReplyResponse.builder()
-                .id(this.id)
-                .videoId(videoId)
-                .replierId(replier.getId())
-                .content(this.content)
-                .build();
+    @Nonnull
+    public ResponseDtos toResponse() {
+        return new ResponseDtos(id, videoId, replier.getId(), content);
     }
 
     public Reply updateContent(final String content,
@@ -80,7 +77,7 @@ public class Reply extends BaseEntity implements HasOwner, Feedable {
     }
 
     @Override
-    public boolean isOwner(final Long replierId) {
+    public boolean isOwner(final long replierId) {
         return this.replier.isYou(replierId);
     }
 
@@ -109,8 +106,10 @@ public class Reply extends BaseEntity implements HasOwner, Feedable {
         return false;
     }
 
+    @Nonnull
     @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
+    public LocalDateTime getCreatedAt() {
+        return super.getCreatedAt();
     }
+
 }

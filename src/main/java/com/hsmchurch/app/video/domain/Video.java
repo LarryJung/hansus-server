@@ -2,16 +2,20 @@ package com.hsmchurch.app.video.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
 import com.hsmchurch.app.common.Feedable;
-import com.hsmchurch.app.common.support.AboutTimeHelper;
+import com.hsmchurch.app.common.support.AboutTimeHelperKt;
+import com.hsmchurch.app.video.support.DescriptionParseResult;
+import com.hsmchurch.app.video.support.DescriptionParser;
 import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
 import com.hsmchurch.app.video.ui.response.LikeUser;
 import com.hsmchurch.app.video.ui.response.ReplyForVideo;
-import com.hsmchurch.app.video.ui.response.VideoListResponse;
-import com.hsmchurch.app.video.support.DescriptionParseResult;
-import com.hsmchurch.app.video.support.DescriptionParser;
 import com.hsmchurch.app.video.ui.response.VideoDetailResponse;
-import lombok.*;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
+import javax.annotation.Nonnull;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -58,9 +62,10 @@ public class Video extends BaseEntity implements Feedable {
     @Embedded
     private Thumbnail thumbnail;
 
+    @Nonnull
     @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
+    public LocalDateTime getCreatedAt() {
+        return super.getCreatedAt();
     }
 
     public static Video from(final YoutubeVideoInfo youtubeVideoInfo, final DescriptionParser descriptionParser) {
@@ -71,7 +76,7 @@ public class Video extends BaseEntity implements Feedable {
                 .preacher(parsedResult.getPreacher())
                 .bibleContents(parsedResult.getBibleContents())
                 .youtubeId(youtubeVideoInfo.getId())
-                .youtubePublishedAt(AboutTimeHelper.parse(youtubeVideoInfo.getPublishedAt()))
+                .youtubePublishedAt(AboutTimeHelperKt.parseToLocalDate(youtubeVideoInfo.getPublishedAt()))
                 .thumbnail(
                         Thumbnail.of(
                                 youtubeVideoInfo.getThumbNail().getThumbnailUrl(),

@@ -1,8 +1,8 @@
 package com.hsmchurch.app.security.oauth;
 
 import com.hsmchurch.app.account.domain.Account;
-import com.hsmchurch.app.account.domain.AccountRepository;
 import com.hsmchurch.app.account.domain.AccountOrigin;
+import com.hsmchurch.app.account.domain.AccountRepository;
 import com.hsmchurch.app.account.domain.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
