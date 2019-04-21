@@ -44,6 +44,7 @@ dependencies {
 
     compile('com.querydsl:querydsl-apt')
     compile('com.querydsl:querydsl-jpa')
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 
     compile 'org.json:json:20171018'
 
