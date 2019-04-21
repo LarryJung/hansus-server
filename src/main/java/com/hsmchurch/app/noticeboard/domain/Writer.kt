@@ -6,7 +6,7 @@ import javax.persistence.Embeddable
 
 @Embeddable
 data class Writer(
-        @Column(name = "writer_id") private val id: Long
+        @Column(name = "writer_id") val id: Long
 ) {
 
     fun isYou(writerId: Long): Boolean = writerId == this.id

@@ -8,12 +8,11 @@ import com.hsmchurch.app.reply.ui.ResponseDtos;
 
 import javax.annotation.Nonnull;
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table(name = "replies")
 @Entity
-public class Reply extends BaseEntity implements HasOwner, Feedable {
+public class Reply extends BaseEntity implements HasOwner{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -104,12 +103,6 @@ public class Reply extends BaseEntity implements HasOwner, Feedable {
             return true;
         }
         return false;
-    }
-
-    @Nonnull
-    @Override
-    public LocalDateTime getCreatedAt() {
-        return super.getCreatedAt();
     }
 
 }

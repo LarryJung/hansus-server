@@ -19,7 +19,7 @@ class VideoService constructor(
             videoRepository.findByIdOrNull(id) ?: throw RuntimeException("영상을 찾을 수 없습니다.")
 
     fun listOfVideo(pageable: Pageable): Page<Video> =
-        videoRepository.findAll(pageable)
+            videoRepository.findAll(pageable)
 
     fun likeList(accountId: Long,
                  pageable: Pageable): PageImpl<Video> {

@@ -44,18 +44,17 @@ public class YoutubeCrawler {
                 continue;
             }
 
-            final YoutubeVideoInfo newOne = YoutubeVideoInfo.builder()
-                    .id(item.getJSONObject("id").optString("videoId"))
-                    .publishedAt(item.getJSONObject("snippet").optString("publishedAt"))
-                    .title(item.getJSONObject("snippet").optString("title"))
-                    .description(item.getJSONObject("snippet").optString("description"))
-                    .thumbNail(ThumbNailForm.builder()
-                            .thumbnailUrl(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").optString("url"))
-                            .thumbnailWidth(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("width"))
-                            .thumbnailHeight(item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("height"))
-                            .build())
-                    .build();
-
+            final YoutubeVideoInfo newOne = new YoutubeVideoInfo(
+                    item.getJSONObject("id").optString("videoId"),
+                    item.getJSONObject("snippet").optString("publishedAt"),
+                    item.getJSONObject("snippet").optString("title"),
+                    item.getJSONObject("snippet").optString("description"),
+                    new ThumbNailForm(
+                            item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").optString("url"),
+                            item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("width"),
+                            item.getJSONObject("snippet").getJSONObject("thumbnails").getJSONObject("high").getInt("height")
+                    )
+            );
             newList.add(newOne);
         }
 

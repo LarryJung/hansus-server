@@ -4,6 +4,6 @@ import java.time.LocalDateTime
 
 interface Feedable {
 
-    fun getCreatedAt(): LocalDateTime
+    val createdAt: LocalDateTime
 
 }

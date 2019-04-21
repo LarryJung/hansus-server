@@ -10,7 +10,7 @@ import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
 
 /**
- * QVideo is a Querydsl query type for Video
+ * QVideo is a Querydsl query type for Video.kt
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
 public class QVideo extends EntityPathBase<Video> {

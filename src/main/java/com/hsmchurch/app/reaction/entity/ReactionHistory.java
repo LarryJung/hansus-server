@@ -35,11 +35,6 @@ public class ReactionHistory extends BaseEntity implements HasOwner {
     }
 
     @Override
-    public boolean isOwner(final Long accountId) {
-        return this.reactionHistoryId.isOwner(accountId);
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -56,5 +51,10 @@ public class ReactionHistory extends BaseEntity implements HasOwner {
 
     public void cancel() {
         markAsDeleted();
+    }
+
+    @Override
+    public boolean isOwner(final long accountId) {
+        return this.reactionHistoryId.isOwner(accountId);
     }
 }
