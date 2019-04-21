@@ -12,7 +12,7 @@ spring:
     properties:
       hibernate:
         show-sql: true
-        hbm2ddl.auto: create
+        hbm2ddl.auto: create-drop
         format_sql: true
     database-platform: H2
 
@@ -61,3 +61,43 @@ youtube:
   url:
   channel-id:
 
+---
+spring:
+  profiles: prod
+  datasource:
+    platform: h
+    hikari:
+      jdbc-url: ${jdbc_database_url}
+      username: ${jdbc_database_username}
+      password: ${jdbc_database_password}
+      driver-class-name: 'org.h2.Driver'
+  jpa:
+    properties:
+      hibernate:
+        show-sql: true
+        hbm2ddl.auto: create-drop
+        format_sql: true
+    database-platform: H2
+
+youtube:
+  key: ${youtube_client_key}
+  url: ${youtube_api_url}
+  channel-id: ${youtube_channel_id}
+
+security:
+  oauth:
+    host:
+      kakao: https://kauth.kakao.com/oauth/authorize
+    client-id:
+      kakao: ${kakao_client_id}
+    redirect-uri: http://localhost:8080/oauth
+
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh
+  issuer: hsm-church
