@@ -5,6 +5,7 @@ import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.ui.response.ReplyResponse;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.Objects;
 
 @Table(name = "replies")
 @Entity
+@NoArgsConstructor
 public class Reply extends BaseEntity implements HasOwner, Feedable {
 
     @Id
