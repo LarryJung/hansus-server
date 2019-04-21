@@ -56,10 +56,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // h2 console이 csrf 설정이 안먹히기 때문에 security 설정을 배포 환경에 따라 분리
-        if (isLocalMode()) setLocalMode(http);
-        else setRealMode(http);
+        selectProfile(http)
 
-        http
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
@@ -69,6 +67,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/accounts/**").permitAll()
                 .anyRequest().authenticated();
+    }
+
+    private HttpSecurity selectProfile(HttpSecurity http) throws Exception {
+        if (isLocalMode()) return setLocalMode(http);
+        else return setRealMode(http);
     }
 
     @Override
@@ -94,7 +97,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return http;
     }
 
-    private void setRealMode(HttpSecurity http) throws Exception {
+    private HttpSecurity setRealMode(HttpSecurity http) throws Exception {
+        http
+                .headers().frameOptions().sameOrigin();
+        http
+                .authorizeRequests()
+                .antMatchers("/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
+                .and().csrf().disable();
+
+        return http;
     }
 
 
