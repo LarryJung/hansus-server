@@ -65,19 +65,17 @@ youtube:
 spring:
   profiles: prod
   datasource:
-    platform: h
     hikari:
       jdbc-url: ${jdbc_database_url}
       username: ${jdbc_database_username}
       password: ${jdbc_database_password}
-      driver-class-name: 'org.h2.Driver'
+      driver-class-name: 'org.postgresql.Driver'
   jpa:
     properties:
       hibernate:
         show-sql: true
         hbm2ddl.auto: create-drop
         format_sql: true
-    database-platform: H2
 
 youtube:
   key: ${youtube_client_key}
