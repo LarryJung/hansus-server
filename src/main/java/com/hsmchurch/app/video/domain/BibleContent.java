@@ -1,26 +1,29 @@
 package com.hsmchurch.app.video.domain;
 
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import java.util.Objects;
 
+@NoArgsConstructor
 @Embeddable
 public class BibleContent {
 
     @Column(name = "bible_book")
     @Enumerated(value = EnumType.STRING)
-    private final BibleBook bibleBook;
+    private BibleBook bibleBook;
 
     @Column(name = "chapter")
-    private final int chapter;
+    private int chapter;
 
     @Column(name = "start_verse")
-    private final int startVerse;
+    private int startVerse;
 
     @Column(name = "end_verse")
-    private final int endVerse;
+    private int endVerse;
 
     public BibleContent(final BibleBook bibleBook,
                         final int chapter,

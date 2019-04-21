@@ -32,7 +32,7 @@ public class Notice extends BaseEntity implements HasOwner, Feedable {
     private String title;
 
     @Lob
-    @Column(name = "content")
+//    @Column(name = "content")
     private String content; // 단순 글이 아닐 것이므로 향후 객체화 가능
 
     @Embedded

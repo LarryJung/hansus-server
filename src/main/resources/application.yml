@@ -73,8 +73,11 @@ spring:
     properties:
       hibernate:
         show-sql: true
-        hbm2ddl.auto: create-drop
+        hbm2ddl-auto: none
         format_sql: true
+        temp:
+          use_jdbc_metadata_defaults: false
+        globally_quoted_identifiers: true
     database: postgresql
     database-platform: org.hibernate.dialect.PostgreSQLDialect
 
