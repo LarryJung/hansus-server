@@ -1,7 +1,5 @@
 package com.hsmchurch.app.account.application;
 
-import com.hsmchurch.app.account.ui.request.AccountUpdateRequest;
-import com.hsmchurch.app.account.ui.response.AccountResponse;
 import com.hsmchurch.app.account.domain.Account;
 import com.hsmchurch.app.account.domain.AccountRepository;
 import lombok.RequiredArgsConstructor;
@@ -32,4 +30,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public void created(Account build) {
+        accountRepository.save(build);
+    }
 }

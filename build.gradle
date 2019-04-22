@@ -32,7 +32,6 @@ dependencies {
     compile 'org.springframework.boot:spring-boot-starter-web'
     compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
-//    compile 'mysql:mysql-connector-java'
     compile('org.projectlombok:lombok')
     compile 'com.h2database:h2'
 
@@ -44,7 +43,7 @@ dependencies {
 
     compile('com.querydsl:querydsl-apt')
     compile('com.querydsl:querydsl-jpa')
-    compile 'org.postgresql:postgresql:42.1.4'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.5'
 
     compile 'org.json:json:20171018'
 

@@ -25,7 +25,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Notice extends BaseEntity implements HasOwner, Feedable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")

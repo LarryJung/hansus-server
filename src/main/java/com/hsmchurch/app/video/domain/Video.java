@@ -29,7 +29,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Video extends BaseEntity implements Feedable {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "video_type")
