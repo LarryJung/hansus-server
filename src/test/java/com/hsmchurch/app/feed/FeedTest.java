@@ -10,7 +10,6 @@ import com.hsmchurch.app.noticeboard.ui.response.NoticeResponse;
 import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import org.junit.Test;
 
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;

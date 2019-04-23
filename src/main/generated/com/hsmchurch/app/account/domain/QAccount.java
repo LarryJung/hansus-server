@@ -31,9 +31,6 @@ public class QAccount extends EntityPathBase<Account> {
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     //inherited
-    public final BooleanPath deleted = _super.deleted;
-
-    //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
     public final StringPath gender = createString("gender");
@@ -50,9 +47,6 @@ public class QAccount extends EntityPathBase<Account> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
-
-    //inherited
-    public final BooleanPath usable = _super.usable;
 
     public QAccount(String variable) {
         super(Account.class, forVariable(variable));

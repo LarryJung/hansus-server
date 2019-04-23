@@ -28,9 +28,6 @@ public class QReactionHistory extends EntityPathBase<ReactionHistory> {
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     //inherited
-    public final BooleanPath deleted = _super.deleted;
-
-    //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
     public final QReactionContent reactionContent;
@@ -39,9 +36,6 @@ public class QReactionHistory extends EntityPathBase<ReactionHistory> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
-
-    //inherited
-    public final BooleanPath usable = _super.usable;
 
     public QReactionHistory(String variable) {
         this(ReactionHistory.class, forVariable(variable), INITS);

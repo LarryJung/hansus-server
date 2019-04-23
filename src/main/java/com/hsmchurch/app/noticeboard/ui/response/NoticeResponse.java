@@ -3,22 +3,26 @@ package com.hsmchurch.app.noticeboard.ui.response;
 import com.hsmchurch.app.feed.FeedResponse;
 import com.hsmchurch.app.feed.FeedType;
 import com.hsmchurch.app.feed.NoticeFeedResponse;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Value;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
-@Value
+@Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NoticeResponse {
 
-    private final Long id;
-    private final String title;
-    private final String content;
-    private final Long writerId;
-    private final String writerName;
-    private final LocalDateTime createdAt;
-    private final LocalDateTime updatedAt;
+    private Long id;
+    private String title;
+    private String content;
+    private Long writerId;
+    private String writerName;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public FeedResponse toFeed() {
         return NoticeFeedResponse.builder()
@@ -26,7 +30,6 @@ public class NoticeResponse {
                 .id(id)
                 .title(title)
                 .content(content)
-                .title(title)
                 .writerId(writerId)
                 .writerName(writerName)
                 .createdAt(createdAt)

@@ -1,8 +1,8 @@
 package com.hsmchurch.app.feed;
 
-import com.hsmchurch.app.video.domain.BibleContent;
 import com.hsmchurch.app.video.domain.Thumbnail;
 import com.hsmchurch.app.video.domain.VideoType;
+import com.hsmchurch.app.video.ui.response.BibleResponse;
 import lombok.Builder;
 import lombok.Value;
 
@@ -22,7 +22,7 @@ public class VideoFeedResponse implements FeedResponse {
     private final LocalDate filmedAt;
     private final String title;
     private final String preacher;
-    private final List<BibleContent> bibleContents;
+    private final List<BibleResponse> bibleContents;
     private final Thumbnail thumbnail;
 
     @Override

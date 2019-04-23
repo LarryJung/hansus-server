@@ -2,7 +2,6 @@ package com.hsmchurch.app.reply.domain;
 
 import com.hsmchurch.app.reply.ui.request.ReplyDeleteRequest;
 import com.hsmchurch.app.reply.ui.request.TargetVideoRepliesDeleteRequest;
-import com.hsmchurch.app.reply.ui.response.ReplyResponse;
 import com.hsmchurch.app.video.ui.response.ReplyForVideo;
 
 import java.util.List;

@@ -1,10 +1,10 @@
 package com.hsmchurch.app.video.application;
 
-import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import com.hsmchurch.app.video.domain.Video;
 import com.hsmchurch.app.video.domain.VideoRepository;
 import com.hsmchurch.app.video.support.DescriptionParser;
 import com.hsmchurch.app.video.support.YoutubeCrawler;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import lombok.RequiredArgsConstructor;
 import org.json.JSONException;
 import org.springframework.stereotype.Service;
@@ -28,8 +28,11 @@ public class YoutubeCrawlingService {
             final List<Video> result = youtubeCrawler.collectInfos(null, new ArrayList<>()).stream()
                     .map(info -> Video.from(info, descriptionParser)).collect(toList());
 
-            return Optional.of(videoRepository.saveAll(result).stream()
-                    .map(Video::toResponseDto).collect(toList()));
+            return Optional.of(result.stream()
+                    .filter(video -> !videoRepository.findByYoutubeId(video.getYoutubeId()).isPresent())
+                    .map(video -> videoRepository.save(video).toResponseDto())
+                    .collect(toList()));
+
         } catch (JSONException e) {
             return Optional.empty();
         }

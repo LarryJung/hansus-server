@@ -1,20 +1,18 @@
 package com.hsmchurch.app.reply.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
-import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.reply.ui.request.ReplyApplyRequest;
 import com.hsmchurch.app.reply.ui.response.ReplyResponse;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Table(name = "replies")
 @Entity
 @NoArgsConstructor
-public class Reply extends BaseEntity implements HasOwner, Feedable {
+public class Reply extends BaseEntity implements HasOwner{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -111,8 +109,4 @@ public class Reply extends BaseEntity implements HasOwner, Feedable {
         return false;
     }
 
-    @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
-    }
 }

@@ -65,7 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(socialFilter(), JwtAuthenticationFilter.class);
         http
                 .authorizeRequests()
-                .antMatchers("/api/v1/accounts/**").permitAll()
+                .antMatchers("/api/v1/**").permitAll()
                 .anyRequest().authenticated();
     }
 
@@ -102,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin();
         http
                 .authorizeRequests()
-                .antMatchers("/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
+                .antMatchers("/batch/youtube", "/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
                 .and().csrf().disable();
 
         return http;

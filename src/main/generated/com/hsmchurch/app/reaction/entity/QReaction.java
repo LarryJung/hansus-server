@@ -25,9 +25,6 @@ public class QReaction extends EntityPathBase<Reaction> {
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     //inherited
-    public final BooleanPath deleted = _super.deleted;
-
-    //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
@@ -38,9 +35,6 @@ public class QReaction extends EntityPathBase<Reaction> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
-
-    //inherited
-    public final BooleanPath usable = _super.usable;
 
     public QReaction(String variable) {
         super(Reaction.class, forVariable(variable));

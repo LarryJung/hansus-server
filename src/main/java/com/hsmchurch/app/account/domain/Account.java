@@ -7,11 +7,8 @@ import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
-import java.util.Objects;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
-@Getter
+@EqualsAndHashCode(callSuper = true)
+@Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,7 +17,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 public class Account extends BaseEntity {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
@@ -68,36 +65,4 @@ public class Account extends BaseEntity {
                 .build();
     }
 
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", password='" + password + '\'' +
-                ", accountOrigin=" + accountOrigin +
-                ", role=" + role +
-                '}';
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        Account account = (Account) o;
-        return Objects.equals(id, account.id) &&
-                Objects.equals(name, account.name) &&
-                Objects.equals(password, account.password) &&
-                accountOrigin == account.accountOrigin &&
-                Objects.equals(socialId, account.socialId) &&
-                role == account.role &&
-                Objects.equals(gender, account.gender) &&
-                Objects.equals(birthday, account.birthday) &&
-                Objects.equals(ageRange, account.ageRange);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), id, name, password, accountOrigin, socialId, role, gender, birthday, ageRange);
-    }
 }

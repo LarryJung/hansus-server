@@ -1,8 +1,8 @@
 package com.hsmchurch.app.security.oauth;
 
 import com.hsmchurch.app.account.domain.Account;
-import com.hsmchurch.app.account.domain.AccountRepository;
 import com.hsmchurch.app.account.domain.AccountOrigin;
+import com.hsmchurch.app.account.domain.AccountRepository;
 import com.hsmchurch.app.account.domain.Role;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -41,17 +41,22 @@ public class SocialLoginAuthenticationProvider implements AuthenticationProvider
         SocialProviders provider = dto.getProvider();
         log.info("userid, provider : {}, {}", socialId, provider.getUserinfoEndpoint());
         return accountRepository.findBySocialIdAndAccountOrigin(socialId, AccountOrigin.valueOf(provider.getProviderName()))
-                .orElseGet(() -> accountRepository.save(
-                        Account.builder()
-                                .name(property.getUserNickname())
-                                .password(String.valueOf(UUID.randomUUID().getMostSignificantBits()))
-                                .role(Role.MEMBER)
-                                .socialId(socialId)
-                                .accountOrigin(AccountOrigin.valueOf(provider.getProviderName()))
-                                .gender(property.getGender())
-                                .ageRange(property.getAgeRange())
-                                .birthday(property.getBirthDay())
-                                .build()));
+                .orElseGet(() -> {
+                    final Account newAccount = Account.builder()
+                            .name(property.getUserNickname())
+                            .password(String.valueOf(UUID.randomUUID().getMostSignificantBits()))
+                            .role(Role.MEMBER)
+                            .socialId(socialId)
+                            .accountOrigin(AccountOrigin.valueOf(provider.getProviderName()))
+                            .gender(property.getGender())
+                            .ageRange(property.getAgeRange())
+                            .birthday(property.getBirthDay())
+                            .build();
+                    log.error(newAccount.toString());
+                    final Account saved = accountRepository.save(newAccount);
+                    log.error(saved.toString());
+                    return saved;
+                });
     }
 
 }

@@ -2,13 +2,16 @@ package com.hsmchurch.app.video.ui.controllers;
 
 import com.hsmchurch.app.video.application.VideoService;
 import com.hsmchurch.app.video.domain.Video;
-import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import com.hsmchurch.app.video.ui.response.VideoDetailResponse;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(path = "/api/v1/videos")
@@ -28,7 +31,7 @@ public class VideoController {
     @GetMapping
     public ResponseEntity<Page<VideoListResponse>> findAll(Pageable pageable) {
         final Page<VideoListResponse> result = videoService.listOfVideo(pageable).map(Video::toResponseDto);
-
+        System.out.println(result.getContent());
         return ResponseEntity.ok(result);
     }
 
