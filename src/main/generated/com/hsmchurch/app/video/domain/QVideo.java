@@ -30,9 +30,6 @@ public class QVideo extends EntityPathBase<Video> {
     public final DateTimePath<java.time.LocalDateTime> createdAt = _super.createdAt;
 
     //inherited
-    public final BooleanPath deleted = _super.deleted;
-
-    //inherited
     public final DateTimePath<java.time.LocalDateTime> deletedAt = _super.deletedAt;
 
     public final DatePath<java.time.LocalDate> filmedAt = createDate("filmedAt", java.time.LocalDate.class);
@@ -47,9 +44,6 @@ public class QVideo extends EntityPathBase<Video> {
 
     //inherited
     public final DateTimePath<java.time.LocalDateTime> updatedAt = _super.updatedAt;
-
-    //inherited
-    public final BooleanPath usable = _super.usable;
 
     public final EnumPath<VideoType> videoType = createEnum("videoType", VideoType.class);
 

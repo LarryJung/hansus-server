@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -66,8 +65,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(socialFilter(), JwtAuthenticationFilter.class);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/vi/accounts/hhh").permitAll()
-                .antMatchers("/api/v1/**").hasAnyRole("ROLE_MEMBER")
+                .antMatchers("/api/v1/**").permitAll()
                 .anyRequest().authenticated();
     }
 
@@ -104,7 +102,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin();
         http
                 .authorizeRequests()
-                .antMatchers("/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
+                .antMatchers("/batch/youtube", "/", "/swagger**", "/swagger-resources/**/**", "/v2/api-docs", "/webjars/**", "/springfox**", "/me", "/js/**", "/css/**", "/image/**", "/fonts/**", "/favicon**").permitAll()
                 .and().csrf().disable();
 
         return http;

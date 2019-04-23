@@ -8,9 +8,8 @@ import com.hsmchurch.app.video.ui.request.LikeTagRequest;
 import com.hsmchurch.app.video.ui.response.LikeUser;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,12 +18,17 @@ import static com.hsmchurch.app.common.support.CrudStringFormat.CANCEL_FAIL;
 @Slf4j
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class LikeTagService {
 
     private final static String ENTITY_NAME = "좋아요 태그";
     private final LikeTagRepository likeTagRepository;
 
     public void applyLikeTag(final LikeTagRequest likeTagRequest) {
+        if (likeTagRepository.findByLikeTagId(LikeTag.of(likeTagRequest).getLikeTagId()).isPresent()) {
+            log.info("이미 즐겨찾기 하였습니다. {}", likeTagRequest);
+            return;
+        }
         likeTagRepository.save(LikeTag.of(likeTagRequest));
     }
 
@@ -38,9 +42,8 @@ public class LikeTagService {
         }
     }
 
-    public Page<LikeTag> findAllByAccountId(final Long accountId,
-                                            final Pageable pageable) {
-        return likeTagRepository.findAllByLikeTagId_AccountId(accountId, pageable);
+    public List<LikeTag> findAllByAccountId(final Long accountId) {
+        return likeTagRepository.findAllByLikeTagId_AccountId(accountId);
     }
 
     public LikeTag findBy(final Long videoId,

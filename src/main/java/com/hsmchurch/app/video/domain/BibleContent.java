@@ -1,13 +1,15 @@
 package com.hsmchurch.app.video.domain;
 
+import com.hsmchurch.app.video.ui.response.BibleResponse;
+import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import java.util.Objects;
 
+@Data
 @NoArgsConstructor
 @Embeddable
 public class BibleContent {
@@ -46,19 +48,13 @@ public class BibleContent {
         }
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        BibleContent that = (BibleContent) o;
-        return chapter == that.chapter &&
-                startVerse == that.startVerse &&
-                endVerse == that.endVerse &&
-                bibleBook == that.bibleBook;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(bibleBook, chapter, startVerse, endVerse);
+    public BibleResponse toResponse() {
+        return BibleResponse.builder()
+                .bibleBook(bibleBook.getKorean())
+                .testamentType(bibleBook.getTestamentType())
+                .chapter(chapter)
+                .startVerse(startVerse)
+                .endVerse(endVerse)
+                .build();
     }
 }

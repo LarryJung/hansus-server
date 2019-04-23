@@ -2,7 +2,6 @@ package com.hsmchurch.app.video.ui.response;
 
 import com.hsmchurch.app.feed.FeedType;
 import com.hsmchurch.app.feed.VideoFeedResponse;
-import com.hsmchurch.app.video.domain.BibleContent;
 import com.hsmchurch.app.video.domain.Thumbnail;
 import com.hsmchurch.app.video.domain.VideoType;
 import lombok.Builder;
@@ -23,7 +22,7 @@ public class VideoListResponse {
     private final LocalDate filmedAt;
     private final String title;
     private final String preacher;
-    private final List<BibleContent> bibleContents;
+    private final List<BibleResponse> bibleContents;
     private final Thumbnail thumbnail;
 
     public VideoFeedResponse toFeed() {

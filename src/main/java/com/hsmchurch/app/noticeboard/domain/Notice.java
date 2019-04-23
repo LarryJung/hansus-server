@@ -1,28 +1,21 @@
 package com.hsmchurch.app.noticeboard.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
-import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUpdateRequest;
 import com.hsmchurch.app.noticeboard.ui.request.NoticeUploadRequest;
-import com.hsmchurch.app.noticeboard.ui.response.NoticeResponse;
-import com.hsmchurch.app.noticeboard.ui.response.NoticeListResponse;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import javax.persistence.*;
 
-import java.time.LocalDateTime;
-
-import static javax.persistence.GenerationType.IDENTITY;
-
 @Slf4j
 @Getter
 @NoArgsConstructor
 @Table(name = "notices")
 @Entity
-public class Notice extends BaseEntity implements HasOwner, Feedable {
+public class Notice extends BaseEntity implements HasOwner {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,8 +24,7 @@ public class Notice extends BaseEntity implements HasOwner, Feedable {
     @Column(name = "title")
     private String title;
 
-    @Lob
-//    @Column(name = "content")
+    @Column(name = "content")
     private String content; // 단순 글이 아닐 것이므로 향후 객체화 가능
 
     @Embedded
@@ -72,8 +64,4 @@ public class Notice extends BaseEntity implements HasOwner, Feedable {
         return false;
     }
 
-    @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
-    }
 }

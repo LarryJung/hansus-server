@@ -1,16 +1,18 @@
 package com.hsmchurch.app.video.domain;
 
 import com.hsmchurch.app.common.BaseEntity;
-import com.hsmchurch.app.common.Feedable;
 import com.hsmchurch.app.common.support.AboutTimeHelper;
+import com.hsmchurch.app.video.support.DescriptionParseResult;
+import com.hsmchurch.app.video.support.DescriptionParser;
 import com.hsmchurch.app.video.ui.request.YoutubeVideoInfo;
 import com.hsmchurch.app.video.ui.response.LikeUser;
 import com.hsmchurch.app.video.ui.response.ReplyForVideo;
-import com.hsmchurch.app.video.ui.response.VideoListResponse;
-import com.hsmchurch.app.video.support.DescriptionParseResult;
-import com.hsmchurch.app.video.support.DescriptionParser;
 import com.hsmchurch.app.video.ui.response.VideoDetailResponse;
-import lombok.*;
+import com.hsmchurch.app.video.ui.response.VideoListResponse;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -18,7 +20,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static javax.persistence.GenerationType.IDENTITY;
+import static java.util.stream.Collectors.toList;
 
 @Getter
 @Builder
@@ -26,7 +28,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @Table(name = "videos")
 @Entity
-public class Video extends BaseEntity implements Feedable {
+public class Video extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -45,7 +47,7 @@ public class Video extends BaseEntity implements Feedable {
     @Column(name = "preacher")
     private String preacher;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "bible_contents", joinColumns = @JoinColumn(name = "video_id"))
     private List<BibleContent> bibleContents;
 
@@ -58,18 +60,13 @@ public class Video extends BaseEntity implements Feedable {
     @Embedded
     private Thumbnail thumbnail;
 
-    @Override
-    public LocalDateTime feed_created_at() {
-        return getCreatedAt();
-    }
-
     public static Video from(final YoutubeVideoInfo youtubeVideoInfo, final DescriptionParser descriptionParser) {
         final DescriptionParseResult parsedResult = youtubeVideoInfo.parseDescription(descriptionParser);
         return Video.builder()
                 .title(youtubeVideoInfo.getTitle())
                 .filmedAt(parsedResult.getFilmedAt())
-                .preacher(parsedResult.getPreacher())
-                .bibleContents(parsedResult.getBibleContents())
+                .preacher(parsedResult.getPreacher().orElse(null))
+                .bibleContents(parsedResult.getBibleContents().orElse(null))
                 .youtubeId(youtubeVideoInfo.getId())
                 .youtubePublishedAt(AboutTimeHelper.parse(youtubeVideoInfo.getPublishedAt()))
                 .thumbnail(
@@ -77,11 +74,13 @@ public class Video extends BaseEntity implements Feedable {
                                 youtubeVideoInfo.getThumbNail().getThumbnailUrl(),
                                 youtubeVideoInfo.getThumbNail().getThumbnailWidth(),
                                 youtubeVideoInfo.getThumbNail().getThumbnailHeight()))
-                .videoType(VideoType.PREACH)
+                .videoType(parsedResult.getVideoType())
                 .build();
     }
 
     public VideoListResponse toResponseDto() {
+        System.out.println(this.title);
+        System.out.println(this.bibleContents);
         return VideoListResponse.builder()
                 .id(this.id)
                 .filmedAt(this.filmedAt)
@@ -90,7 +89,7 @@ public class Video extends BaseEntity implements Feedable {
                 .youtubePublishedAt(this.youtubePublishedAt)
                 .title(this.title)
                 .preacher(this.preacher)
-                .bibleContents(this.bibleContents)
+                .bibleContents(this.bibleContents.stream().map(BibleContent::toResponse).collect(toList()))
                 .thumbnail(this.thumbnail)
                 .build();
     }

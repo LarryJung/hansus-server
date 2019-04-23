@@ -34,7 +34,7 @@ public class Account extends BaseEntity {
     private AccountOrigin accountOrigin;
 
     @Column(name = "social_id")
-    private String socialId = null;
+    private String socialId;
 
     @NotNull
     @Column(name = "role")
@@ -42,13 +42,13 @@ public class Account extends BaseEntity {
     private Role role;
 
     @Column(name = "gender")
-    private String gender = null;
+    private String gender;
 
     @Column(name = "birthday")
-    private String birthday = null;
+    private String birthday;
 
     @Column(name = "age_range")
-    private String ageRange = null;
+    private String ageRange;
 
     public boolean isYou(final Long writerId) {
         return id.equals(writerId);

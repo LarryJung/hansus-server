@@ -9,4 +9,5 @@ public interface NoticeRepositoryCustom {
     Page<NoticeResponse> findListAll(Pageable pageable);
 
     NoticeResponse findOneWithWriterName(Long noticeId);
+
 }

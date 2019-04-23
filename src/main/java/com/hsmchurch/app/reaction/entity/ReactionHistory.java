@@ -5,7 +5,10 @@ import com.hsmchurch.app.common.HasOwner;
 import com.hsmchurch.app.video.ui.request.ReactionApplyRequest;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Embedded;
+import javax.persistence.EmbeddedId;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Objects;
 
 @NoArgsConstructor

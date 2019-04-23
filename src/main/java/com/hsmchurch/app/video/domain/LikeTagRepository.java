@@ -1,8 +1,5 @@
 package com.hsmchurch.app.video.domain;
 
-import com.hsmchurch.app.video.ui.response.LikeUser;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
@@ -14,7 +11,7 @@ public interface LikeTagRepository extends
         QuerydslPredicateExecutor<LikeTag>,
         LikeTagRepositoryCustom {
 
-    Page<LikeTag> findAllByLikeTagId_AccountId(Long accountId, Pageable pageable);
+    List<LikeTag> findAllByLikeTagId_AccountId(Long accountId);
 
     Optional<LikeTag> findByLikeTagId(LikeTagId likeTagId);
 
